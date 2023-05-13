@@ -4,6 +4,8 @@
  */
 package tela;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author artur
@@ -26,14 +28,57 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        DtpPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        MitObjCadastrar = new javax.swing.JMenuItem();
+        MitObjConsultar = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        MitAtualizar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Controle de Objetos");
 
-        jMenu1.setText("File");
+        javax.swing.GroupLayout DtpPrincipalLayout = new javax.swing.GroupLayout(DtpPrincipal);
+        DtpPrincipal.setLayout(DtpPrincipalLayout);
+        DtpPrincipalLayout.setHorizontalGroup(
+            DtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 797, Short.MAX_VALUE)
+        );
+        DtpPrincipalLayout.setVerticalGroup(
+            DtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 525, Short.MAX_VALUE)
+        );
+
+        jMenu1.setText("Objeto");
+
+        MitObjCadastrar.setText("Cadastrar");
+        MitObjCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MitObjCadastrarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MitObjCadastrar);
+
+        MitObjConsultar.setText("Consultar");
+        MitObjConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MitObjConsultarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MitObjConsultar);
+        jMenu1.add(jSeparator1);
+
+        MitAtualizar.setText("Atualizar");
+        MitAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MitAtualizarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MitAtualizar);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ajuda");
@@ -54,11 +99,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 809, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(DtpPrincipal)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(DtpPrincipal)
+                .addContainerGap())
         );
 
         pack();
@@ -67,6 +118,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void MitObjCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitObjCadastrarActionPerformed
+        IfrObjeto frmObjeto = new IfrObjeto();
+               
+        DtpPrincipal.add(frmObjeto);
+        
+        frmObjeto.focoCadastro();
+        frmObjeto.setVisible(true);
+    }//GEN-LAST:event_MitObjCadastrarActionPerformed
+
+    private void MitObjConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitObjConsultarActionPerformed
+        IfrObjeto frmObjeto = new IfrObjeto();
+               
+        DtpPrincipal.add(frmObjeto);
+        
+        frmObjeto.focoListagem();
+        frmObjeto.setVisible(true);
+    }//GEN-LAST:event_MitObjConsultarActionPerformed
+
+    private void MitAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitAtualizarActionPerformed
+        JOptionPane.showMessageDialog(this, "Antes de atualizar, selecione o objeto e após clique em atualizar.");
+        
+        IfrObjeto frmObjeto = new IfrObjeto();
+               
+        DtpPrincipal.add(frmObjeto);
+        
+        frmObjeto.focoListagem();
+        frmObjeto.setVisible(true);
+    }//GEN-LAST:event_MitAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,9 +184,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane DtpPrincipal;
+    private javax.swing.JMenuItem MitAtualizar;
+    private javax.swing.JMenuItem MitObjCadastrar;
+    private javax.swing.JMenuItem MitObjConsultar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
