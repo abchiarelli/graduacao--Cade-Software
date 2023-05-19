@@ -4,6 +4,9 @@
  */
 package tela;
 
+import DAO.TipoObjetoDAO;
+import entidade.TipoObjeto;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,11 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class IfrObjeto extends javax.swing.JInternalFrame {
 
+    private ArrayList<TipoObjeto> tiposObjeto = new ArrayList<>();
+
     /**
      * Creates new form IfrObjeto
      */
     public IfrObjeto() {
         initComponents();
+        
+        preencheComboTiposObjeto();
     }
 
     /**
@@ -46,7 +53,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         PnlCadastrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CbbTipoObjeto = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         TxfDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -228,7 +235,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                         .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TxfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PnlCadastrarLayout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CbbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BtnNovoTipoObjeto))
                             .addComponent(TxfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,7 +250,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CbbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnNovoTipoObjeto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -432,6 +439,23 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         TbpObjeto.setSelectedIndex(0);
     }
 
+    private void preencheArrayTiposObjeto() {
+        TipoObjetoDAO tiposDAO = new TipoObjetoDAO();
+        tiposObjeto = tiposDAO.consultarTodos();
+    }
+    
+    private void preencheComboTiposObjeto() {
+        CbbTipoObjeto.removeAllItems();
+        
+        preencheArrayTiposObjeto();
+        
+        CbbTipoObjeto.addItem("-- Selecionar --");
+        
+        for (TipoObjeto tipo : tiposObjeto) {
+            CbbTipoObjeto.addItem(tipo.getDescricao());
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnCadastrar;
@@ -440,6 +464,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnNovoTipoObjeto;
     private javax.swing.JButton BtnSalvar;
     private javax.swing.JComboBox<String> CbbEditTipo;
+    private javax.swing.JComboBox<String> CbbTipoObjeto;
     private javax.swing.JCheckBox ChbEditStatus;
     private javax.swing.JPanel PnlCadastrar;
     private javax.swing.JPanel PnlListagem;
@@ -452,7 +477,6 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TxfEditora;
     private javax.swing.JTextField TxfFilDescricao;
     private javax.swing.JTextField TxfFiltroAutor;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
