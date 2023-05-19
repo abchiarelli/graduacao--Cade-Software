@@ -4,6 +4,8 @@
  */
 package tela;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author artur
@@ -51,6 +53,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         TxfAutor = new javax.swing.JTextField();
         TxfEditora = new javax.swing.JTextField();
+        BtnNovoTipoObjeto = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -199,6 +202,13 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Editora/Produtora:");
 
+        BtnNovoTipoObjeto.setText("+");
+        BtnNovoTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNovoTipoObjetoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnlCadastrarLayout = new javax.swing.GroupLayout(PnlCadastrar);
         PnlCadastrar.setLayout(PnlCadastrarLayout);
         PnlCadastrarLayout.setHorizontalGroup(
@@ -217,10 +227,13 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TxfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PnlCadastrarLayout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnNovoTipoObjeto))
                             .addComponent(TxfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         PnlCadastrarLayout.setVerticalGroup(
             PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +243,8 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnNovoTipoObjeto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -243,7 +257,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(TxfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         TbpObjeto.addTab("Cadastrar", PnlCadastrar);
@@ -401,6 +415,13 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         BtnCadastrar.setEnabled(TbpObjeto.getSelectedIndex() == 1);
     }//GEN-LAST:event_TbpObjetoMouseClicked
 
+    private void BtnNovoTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoTipoObjetoActionPerformed
+        String descr = JOptionPane.showInputDialog("Descrição: ");
+        if (descr != null) {
+            System.out.println("Descriçao: " + descr);
+        }
+    }//GEN-LAST:event_BtnNovoTipoObjetoActionPerformed
+
     public void focoCadastro() {
         BtnBuscar.setEnabled(false);
         TbpObjeto.setSelectedIndex(1);
@@ -416,6 +437,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnCadastrar;
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnFechar;
+    private javax.swing.JButton BtnNovoTipoObjeto;
     private javax.swing.JButton BtnSalvar;
     private javax.swing.JComboBox<String> CbbEditTipo;
     private javax.swing.JCheckBox ChbEditStatus;
