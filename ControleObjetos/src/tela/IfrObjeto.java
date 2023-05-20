@@ -4,10 +4,15 @@
  */
 package tela;
 
+import DAO.ObjetoDAO;
 import DAO.TipoObjetoDAO;
+import entidade.Objeto;
 import entidade.TipoObjeto;
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -22,7 +27,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
      */
     public IfrObjeto() {
         initComponents();
-        
+
         preencheComboTiposObjeto();
     }
 
@@ -205,6 +210,12 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Título/Descrição:");
 
+        TxfDescricao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TxfDescricaoFocusLost(evt);
+            }
+        });
+
         jLabel5.setText("Autor:");
 
         jLabel4.setText("Editora/Produtora:");
@@ -343,6 +354,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         TbpObjeto.addTab("Editar/Atualizar", jPanel1);
 
         BtnCadastrar.setText("Cadastrar");
+        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCadastrarActionPerformed(evt);
+            }
+        });
 
         BtnFechar.setText("Fechar");
         BtnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -381,9 +397,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnFechar)
+                        .addComponent(BtnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnCadastrar))
+                        .addComponent(BtnFechar))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -429,6 +445,46 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_BtnNovoTipoObjetoActionPerformed
 
+    private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
+        // pegar dados inseridos
+        if (camposPreenchidos()) {
+            String titulo = TxfDescricao.getText();
+            String autor = TxfAutor.getText();
+            String publisher = TxfEditora.getText();
+            int status = 1;
+            int tipo = tiposObjeto.get(CbbTipoObjeto.getSelectedIndex() - 1).getId();
+
+            //criar enditade com dados
+            Objeto objeto = new Objeto(titulo, autor, publisher, status, tipo);
+
+            //confirmar dados
+            System.out.println("Entrou");
+            /*
+            //salvar
+            ObjetoDAO objetoDAO = new ObjetoDAO();
+            if (objetoDAO.salvar(objeto) == null) {
+                JOptionPane.showMessageDialog(this, "Objeto cadastrado com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar Objeto.");
+            }
+             */
+        } else {
+            JOptionPane.showMessageDialog(this, "Alguns campos são obrigatórios.");
+        }
+
+    }//GEN-LAST:event_BtnCadastrarActionPerformed
+
+    private void TxfDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxfDescricaoFocusLost
+        Border borderRed = BorderFactory.createLineBorder(Color.RED, 2);
+        Border borderGreen = BorderFactory.createLineBorder(Color.GREEN, 2);
+        
+        if(TxfDescricao.getText().length() == 0) {
+            TxfDescricao.setBorder(borderRed);
+        } else {
+            TxfDescricao.setBorder(borderGreen);
+        }
+    }//GEN-LAST:event_TxfDescricaoFocusLost
+
     public void focoCadastro() {
         BtnBuscar.setEnabled(false);
         TbpObjeto.setSelectedIndex(1);
@@ -443,17 +499,27 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         TipoObjetoDAO tiposDAO = new TipoObjetoDAO();
         tiposObjeto = tiposDAO.consultarTodos();
     }
-    
+
     private void preencheComboTiposObjeto() {
         CbbTipoObjeto.removeAllItems();
-        
+
         preencheArrayTiposObjeto();
-        
+
         CbbTipoObjeto.addItem("-- Selecionar --");
-        
+
         for (TipoObjeto tipo : tiposObjeto) {
             CbbTipoObjeto.addItem(tipo.getDescricao());
         }
+    }
+
+    private boolean camposPreenchidos() {
+        boolean i = true;
+
+        if (TxfDescricao.getText().length() == 0 || TxfEditora.getText().length() == 0 || CbbTipoObjeto.getSelectedIndex() == 0) {
+            i = false;
+        }
+        
+        return i;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
