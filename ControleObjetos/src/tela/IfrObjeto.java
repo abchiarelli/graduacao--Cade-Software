@@ -141,37 +141,34 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         PnlListagemLayout.setHorizontalGroup(
             PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlListagemLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PnlListagemLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                    .addComponent(jLabel6)
                     .addGroup(PnlListagemLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
                             .addGroup(PnlListagemLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PnlListagemLayout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PnlListagemLayout.createSequentialGroup()
-                                        .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel11))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(TxfFilDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                            .addComponent(TxfFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField3))))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PnlListagemLayout.createSequentialGroup()
+                                .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TxfFilDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                    .addComponent(TxfFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField3))))))
+                .addContainerGap(84, Short.MAX_VALUE))
+            .addGroup(PnlListagemLayout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         PnlListagemLayout.setVerticalGroup(
             PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,8 +431,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnEditarActionPerformed
 
     private void TbpObjetoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbpObjetoMouseClicked
-        BtnBuscar.setEnabled(TbpObjeto.getSelectedIndex() == 0);
-        BtnCadastrar.setEnabled(TbpObjeto.getSelectedIndex() == 1);
+        alternarBotoes();
     }//GEN-LAST:event_TbpObjetoMouseClicked
 
     private void BtnNovoTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoTipoObjetoActionPerformed
@@ -486,13 +482,13 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TxfDescricaoFocusLost
 
     public void focoCadastro() {
-        BtnBuscar.setEnabled(false);
         TbpObjeto.setSelectedIndex(1);
+        alternarBotoes();
     }
 
     public void focoListagem() {
-        BtnBuscar.setEnabled(true);
         TbpObjeto.setSelectedIndex(0);
+        alternarBotoes();
     }
 
     private void preencheArrayTiposObjeto() {
@@ -520,6 +516,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         }
         
         return i;
+    }
+    
+    private void alternarBotoes() {
+        BtnBuscar.setEnabled(TbpObjeto.getSelectedIndex() == 0);
+        BtnCadastrar.setEnabled(TbpObjeto.getSelectedIndex() == 1);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
