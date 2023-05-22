@@ -33,8 +33,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         MitObjCadastrar = new javax.swing.JMenuItem();
         MitObjConsultar = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        MitAtualizar = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        MitPessoaCadatrar = new javax.swing.JMenuItem();
+        MitPessoaCadastrar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -69,17 +70,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(MitObjConsultar);
-        jMenu1.add(jSeparator1);
-
-        MitAtualizar.setText("Atualizar");
-        MitAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MitAtualizarActionPerformed(evt);
-            }
-        });
-        jMenu1.add(MitAtualizar);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Pessoa");
+
+        MitPessoaCadatrar.setText("Cadastrar");
+        MitPessoaCadatrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MitPessoaCadatrarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(MitPessoaCadatrar);
+
+        MitPessoaCadastrar.setText("Consultar");
+        jMenu3.add(MitPessoaCadastrar);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Ajuda");
 
@@ -137,16 +144,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frmObjeto.setVisible(true);
     }//GEN-LAST:event_MitObjConsultarActionPerformed
 
-    private void MitAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitAtualizarActionPerformed
-        JOptionPane.showMessageDialog(this, "Antes de atualizar, selecione o objeto e após clique em atualizar.");
+    private void MitPessoaCadatrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitPessoaCadatrarActionPerformed
+        IfrPessoa framePessoa = new IfrPessoa();
         
-        IfrObjeto frmObjeto = new IfrObjeto();
-               
-        DtpPrincipal.add(frmObjeto);
+        DtpPrincipal.add(framePessoa);
         
-        frmObjeto.focoListagem();
-        frmObjeto.setVisible(true);
-    }//GEN-LAST:event_MitAtualizarActionPerformed
+        framePessoa.setVisible(true);
+    }//GEN-LAST:event_MitPessoaCadatrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,13 +189,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DtpPrincipal;
-    private javax.swing.JMenuItem MitAtualizar;
     private javax.swing.JMenuItem MitObjCadastrar;
     private javax.swing.JMenuItem MitObjConsultar;
+    private javax.swing.JMenuItem MitPessoaCadastrar;
+    private javax.swing.JMenuItem MitPessoaCadatrar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
