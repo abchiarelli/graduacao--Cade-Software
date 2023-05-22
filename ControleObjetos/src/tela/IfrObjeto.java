@@ -124,11 +124,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Tipo:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel8.setText("Status:");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("Título/Descrição:");
 
@@ -454,6 +450,8 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             Objeto objeto = new Objeto(titulo, autor, publisher, status, tipo);
 
             //confirmar dados
+            if(JOptionPane.showConfirmDialog(this, "Confirmar cadastro de Produto?") == 0) {
+                
             System.out.println("Entrou");
             /*
             //salvar
@@ -464,6 +462,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar Objeto.");
             }
              */
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Alguns campos são obrigatórios.");
         }
