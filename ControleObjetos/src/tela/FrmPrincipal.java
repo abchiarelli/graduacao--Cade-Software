@@ -84,6 +84,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3.add(MitPessoaCadatrar);
 
         MitPessoaCadastrar.setText("Consultar");
+        MitPessoaCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MitPessoaCadastrarActionPerformed(evt);
+            }
+        });
         jMenu3.add(MitPessoaCadastrar);
 
         jMenuBar1.add(jMenu3);
@@ -149,8 +154,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         DtpPrincipal.add(framePessoa);
         
+        framePessoa.focoCadastro();
         framePessoa.setVisible(true);
     }//GEN-LAST:event_MitPessoaCadatrarActionPerformed
+
+    private void MitPessoaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitPessoaCadastrarActionPerformed
+        IfrPessoa framePessoa = new IfrPessoa();
+        
+        DtpPrincipal.add(framePessoa);
+        
+        framePessoa.focoListagem();
+        framePessoa.setVisible(true);
+    }//GEN-LAST:event_MitPessoaCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
