@@ -440,28 +440,22 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
         // pegar dados inseridos
         if (camposPreenchidos()) {
-            String titulo = TxfDescricao.getText();
-            String autor = TxfAutor.getText();
-            String publisher = TxfEditora.getText();
-            int status = 1;
-            int tipo = tiposObjeto.get(CbbTipoObjeto.getSelectedIndex() - 1).getId();
 
-            //criar enditade com dados
-            Objeto objeto = new Objeto(titulo, autor, publisher, status, tipo);
+            Objeto objeto = criarEntidade();
 
             //confirmar dados
-            if(JOptionPane.showConfirmDialog(this, "Confirmar cadastro de Produto?") == 0) {
-                
-            System.out.println("Entrou");
-            /*
-            //salvar
-            ObjetoDAO objetoDAO = new ObjetoDAO();
-            if (objetoDAO.salvar(objeto) == null) {
-                JOptionPane.showMessageDialog(this, "Objeto cadastrado com sucesso!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao cadastrar Objeto.");
-            }
-             */
+            if (JOptionPane.showConfirmDialog(this, "Confirmar cadastro de Produto?") == 0) {
+
+                System.out.println("Salvou OBJETO");
+
+                //salvar
+                if (salvar(objeto)) {
+                    limparFormularioCadastro();
+                    JOptionPane.showMessageDialog(this, "Objeto cadastrado com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar Objeto.");
+                }
+
             }
         } else {
             JOptionPane.showMessageDialog(this, "Alguns campos são obrigatórios.");
@@ -472,8 +466,8 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private void TxfDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxfDescricaoFocusLost
         Border borderRed = BorderFactory.createLineBorder(Color.RED, 2);
         Border borderGreen = BorderFactory.createLineBorder(Color.GREEN, 2);
-        
-        if(TxfDescricao.getText().length() == 0) {
+
+        if (TxfDescricao.getText().length() == 0) {
             TxfDescricao.setBorder(borderRed);
         } else {
             TxfDescricao.setBorder(borderGreen);
@@ -513,13 +507,36 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         if (TxfDescricao.getText().length() == 0 || TxfEditora.getText().length() == 0 || CbbTipoObjeto.getSelectedIndex() == 0) {
             i = false;
         }
-        
+
         return i;
     }
-    
+
     private void alternarBotoes() {
         BtnBuscar.setEnabled(TbpObjeto.getSelectedIndex() == 0);
         BtnCadastrar.setEnabled(TbpObjeto.getSelectedIndex() == 1);
+    }
+
+    private Objeto criarEntidade() {
+        String titulo = TxfDescricao.getText();
+        String autor = TxfAutor.getText();
+        String publisher = TxfEditora.getText();
+        int tipo = tiposObjeto.get(CbbTipoObjeto.getSelectedIndex() - 1).getId();
+        int status = 1;
+
+        //criar enditade com dados
+        return new Objeto(titulo, autor, publisher, status, tipo);
+    }
+
+    private boolean salvar(Objeto objeto) {
+        ObjetoDAO objetoDAO = new ObjetoDAO();
+        return objetoDAO.salvar(objeto) == null;
+    }
+    
+    private void limparFormularioCadastro() {
+        TxfDescricao.setText("");
+        TxfAutor.setText("");
+        TxfEditora.setText("");
+        CbbTipoObjeto.setSelectedIndex(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
