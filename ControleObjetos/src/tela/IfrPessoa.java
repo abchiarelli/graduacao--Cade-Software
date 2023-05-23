@@ -4,6 +4,10 @@
  */
 package tela;
 
+import DAO.PessoaDAO;
+import entidade.Pessoa;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author artur
@@ -386,14 +390,19 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TbpPessoaMouseClicked
 
     private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
-        //pegar dados
-        String nome = TxtNome.getText();
-        String apelido = TxtApelido.getText();
-        String email = TxtEmail.getText();
-        String telefone = TxtTelefone.getText();
-        //criad entidade
+        Pessoa pessoa = criarEntidade();
 
-        //salvar entidade
+        //confirmar cadastro
+        if (JOptionPane.showConfirmDialog(this, "Confirmar cadastro de Pessoa?") == 0) {
+            //salvar entidade
+            if(salvar(pessoa)) {
+                limparFormularioCadastro();
+                JOptionPane.showMessageDialog(this, "Pessoa cadastrada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar Pessoa.");
+            }
+
+        }
     }//GEN-LAST:event_BtnCadastrarActionPerformed
 
     public void focoListagem() {
@@ -409,6 +418,30 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     private void alternarBotoes() {
         BtnBuscar.setEnabled(TbpPessoa.getSelectedIndex() == 0);
         BtnCadastrar.setEnabled(TbpPessoa.getSelectedIndex() == 1);
+    }
+
+    private boolean salvar(Pessoa pessoa) {
+        PessoaDAO pessoaDAO = new PessoaDAO();
+
+        return pessoaDAO.salvar(pessoa) == null;
+    }
+
+    private Pessoa criarEntidade() {
+        String nome = TxtNome.getText();
+        String apelido = TxtApelido.getText();
+        String email = TxtEmail.getText();
+        String telefone = TxtTelefone.getText();
+
+        return new Pessoa(nome, apelido, email, telefone);
+    }
+    
+    private void limparFormularioCadastro() {
+        TxtNome.setText("");
+        TxtApelido.setText("");
+        TxtEmail.setText("");
+        TxtTelefone.setText("");
+        
+        TxtNome.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
