@@ -21,19 +21,22 @@ public class ObjetoDAO implements IDAOT<Objeto> {
         try {
             String dml = "INSERT INTO objeto VALUES ("
                     + "DEFAULT, "
-                    + o.getTitulo() +"'', "
-                    + o.getAutor() + "'', "
-                    + o.getPublisher() + "'', "
+                    + "'" + o.getTitulo() + "', "
+                    + "'" + o.getAutor() + "', "
+                    + "'" + o.getPublisher() + "', "
                     + o.getStatus() + ", "
                     + o.getTipo()
                     + ");";
-            
+
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
-            
+
+            System.out.println("DML: " + dml);
+
             int retotno = st.executeUpdate(dml);
-            
+
             return null;
         } catch (Exception e) {
+            System.out.println("ERRO: " + e);
             return e.toString();
         }
     }
@@ -50,17 +53,63 @@ public class ObjetoDAO implements IDAOT<Objeto> {
 
     @Override
     public ArrayList<Objeto> consultarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Objeto> objetos = new ArrayList<>();
+
+        try {
+            String dml = "SELECT * FROM objeto ORDER BY titulo;";
+
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            ResultSet rs = st.executeQuery(dml);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String publisher = rs.getString("publisher");
+                int status = rs.getInt("status_id");
+                int tipo = rs.getInt("tipo_objeto_id");
+                
+                Objeto objeto = new Objeto(id, titulo, autor, publisher, status, tipo);
+                
+                objetos.add(objeto);
+            }
+        } catch (Exception e) {
+        }
+
+        return objetos;
     }
 
     @Override
     public ArrayList<Objeto> consultar(String criterio) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Objeto> objetos = new ArrayList<>();
+
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            ResultSet rs = st.executeQuery(criterio);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String publisher = rs.getString("publisher");
+                int status = rs.getInt("status_id");
+                int tipo = rs.getInt("tipo_objeto_id");
+                
+                Objeto objeto = new Objeto(id, titulo, autor, publisher, status, tipo);
+                
+                objetos.add(objeto);
+            }
+        } catch (Exception e) {
+        }
+
+        return objetos;
     }
 
     @Override
     public Objeto consultarId(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
