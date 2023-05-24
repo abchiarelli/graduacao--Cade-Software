@@ -446,12 +446,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             //confirmar dados
             if (JOptionPane.showConfirmDialog(this, "Confirmar cadastro de Produto?") == 0) {
 
-                System.out.println("Salvou OBJETO");
-
                 //salvar
                 if (salvar(objeto)) {
                     limparFormularioCadastro();
                     JOptionPane.showMessageDialog(this, "Objeto cadastrado com sucesso!");
+                    limparFormularioCadastro();
                 } else {
                     JOptionPane.showMessageDialog(this, "Erro ao cadastrar Objeto.");
                 }
