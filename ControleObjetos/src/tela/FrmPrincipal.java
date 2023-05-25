@@ -49,11 +49,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         DtpPrincipal.setLayout(DtpPrincipalLayout);
         DtpPrincipalLayout.setHorizontalGroup(
             DtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 797, Short.MAX_VALUE)
+            .addGap(0, 888, Short.MAX_VALUE)
         );
         DtpPrincipalLayout.setVerticalGroup(
             DtpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 529, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Objeto");
