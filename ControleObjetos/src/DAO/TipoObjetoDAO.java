@@ -22,13 +22,16 @@ public class TipoObjetoDAO implements IDAOT<TipoObjeto> {
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
-            String dml = "INSER INTO tipo_objeto VALUES ("
+            String dml = "INSERT INTO tipo_objeto VALUES ("
                     + "DEFAULT, "
-                    + o.getDescricao()
+                    + "'" + o.getDescricao() + "'"
                     + ");";
 
+            int retorno = st.executeUpdate(dml);
+            
             return null;
         } catch (Exception e) {
+            System.out.println("Erro: " + e);
             return e.toString();
         }
 
