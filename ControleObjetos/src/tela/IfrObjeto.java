@@ -66,24 +66,13 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         TxfAutor = new javax.swing.JTextField();
         TxfEditora = new javax.swing.JTextField();
         BtnNovoTipoObjeto = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        CbbEditTipo = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
-        TxfEditDescricao = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        TxfEditAutor = new javax.swing.JTextField();
-        TxfEditEditora = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        ChbEditStatus = new javax.swing.JCheckBox();
         BtnCadastrar = new javax.swing.JButton();
         BtnFechar = new javax.swing.JButton();
         BtnBuscar = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
         BtnSalvar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        BtnPerdido = new javax.swing.JButton();
 
         setTitle("Objeto");
 
@@ -244,7 +233,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                                 .addComponent(BtnNovoTipoObjeto))
                             .addComponent(TxfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         PnlCadastrarLayout.setVerticalGroup(
             PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,79 +261,6 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         );
 
         TbpObjeto.addTab("Cadastrar", PnlCadastrar);
-
-        jPanel1.setToolTipText("");
-
-        jLabel12.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel12.setText("Editar/Atualizar Objeto");
-
-        jLabel13.setText("Tipo:");
-
-        jLabel14.setText("Título/Descrição:");
-
-        jLabel15.setText("Autor:");
-
-        jLabel16.setText("Editora/Produtora:");
-
-        jLabel17.setText("Status:");
-
-        ChbEditStatus.setText("Perdido");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxfEditDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxfEditAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxfEditEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CbbEditTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ChbEditStatus)))))
-                .addContainerGap(128, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(CbbEditTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(ChbEditStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(TxfEditDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(TxfEditAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(TxfEditEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
-        );
-
-        TbpObjeto.addTab("Editar/Atualizar", jPanel1);
 
         BtnCadastrar.setText("Cadastrar");
         BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +291,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jSeparator1.setToolTipText("");
 
+        BtnPerdido.setText("Perdido");
+        BtnPerdido.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -389,6 +308,8 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                         .addComponent(BtnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnSalvar)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnPerdido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -409,11 +330,10 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                     .addComponent(BtnFechar)
                     .addComponent(BtnBuscar)
                     .addComponent(BtnEditar)
-                    .addComponent(BtnSalvar))
+                    .addComponent(BtnSalvar)
+                    .addComponent(BtnPerdido))
                 .addContainerGap())
         );
-
-        TbpObjeto.setEnabledAt(2, false);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -434,6 +354,13 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         String descr = JOptionPane.showInputDialog("Descrição: ");
         if (descr != null) {
             System.out.println("Descriçao: " + descr);
+            TipoObjeto tipo = new TipoObjeto(descr);
+            if (new TipoObjetoDAO().salvar(tipo) == null) {
+                preencheComboTiposObjeto();
+                JOptionPane.showMessageDialog(this, "Tipo de Objeto salvo!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi possível criar.");
+            }
         }
     }//GEN-LAST:event_BtnNovoTipoObjetoActionPerformed
 
@@ -544,18 +471,14 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnFechar;
     private javax.swing.JButton BtnNovoTipoObjeto;
+    private javax.swing.JButton BtnPerdido;
     private javax.swing.JButton BtnSalvar;
-    private javax.swing.JComboBox<String> CbbEditTipo;
     private javax.swing.JComboBox<String> CbbTipoObjeto;
-    private javax.swing.JCheckBox ChbEditStatus;
     private javax.swing.JPanel PnlCadastrar;
     private javax.swing.JPanel PnlListagem;
     private javax.swing.JTabbedPane TbpObjeto;
     private javax.swing.JTextField TxfAutor;
     private javax.swing.JTextField TxfDescricao;
-    private javax.swing.JTextField TxfEditAutor;
-    private javax.swing.JTextField TxfEditDescricao;
-    private javax.swing.JTextField TxfEditEditora;
     private javax.swing.JTextField TxfEditora;
     private javax.swing.JTextField TxfFilDescricao;
     private javax.swing.JTextField TxfFiltroAutor;
@@ -564,12 +487,6 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -578,7 +495,6 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
