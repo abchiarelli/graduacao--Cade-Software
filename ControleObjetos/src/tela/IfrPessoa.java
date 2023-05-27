@@ -8,6 +8,8 @@ import DAO.PessoaDAO;
 import entidade.Pessoa;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -23,6 +25,8 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
      */
     public IfrPessoa() {
         initComponents();
+
+        popularTabelaPessoa();
     }
 
     /**
@@ -37,7 +41,7 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         TbpPessoa = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPessoa = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -68,7 +72,7 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,12 +88,17 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(20);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tblPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPessoaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblPessoa);
+        if (tblPessoa.getColumnModel().getColumnCount() > 0) {
+            tblPessoa.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblPessoa.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tblPessoa.getColumnModel().getColumn(2).setPreferredWidth(20);
+            tblPessoa.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
         jLabel11.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -231,6 +240,11 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
 
         BtnEditar.setText("Editar");
         BtnEditar.setEnabled(false);
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
 
         BtnSalvar.setText("Salvar");
         BtnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -299,7 +313,6 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnFecharActionPerformed
 
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
-
         if (pessoaSelecionada == null) {
             Pessoa pessoa = criarEntidade();
             //confirmar cadastro
@@ -313,23 +326,102 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
                 atualizar();
             }
         }
+
+        popularTabelaPessoa();
     }//GEN-LAST:event_BtnSalvarActionPerformed
 
     private void TbpPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbpPessoaMouseClicked
         alternarBotoes();
+        alteraBotoesUpdate(false);
     }//GEN-LAST:event_TbpPessoaMouseClicked
 
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
-        // TODO add your handling code here:
+        //pegar id pessoa
+        int index = tblPessoa.getSelectedRow();
+        int id = pessoas.get(index).getId();
+
+        //excluir usando ID
+        if (new PessoaDAO().excluir(id) == null) {
+            popularTabelaPessoa();
+            JOptionPane.showMessageDialog(this, "Pessoa excluída com sucesso!");
+        } else {
+            JOptionPane.showConfirmDialog(this, "Erro ao excluir pessoa.");
+        }
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
     private void BtnLiparFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLiparFiltroActionPerformed
-        // TODO add your handling code here:
+        limparFilrosPessoa();
+        popularTabelaPessoa();
     }//GEN-LAST:event_BtnLiparFiltroActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
-        // TODO add your handling code here:
+        popularTabelaPessoa();
     }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        prepararParaEdicao();
+    }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void tblPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPessoaMouseClicked
+        if (tblPessoa.getSelectedRow() > -1) {
+            alteraBotoesUpdate(true);
+        } else {
+            alteraBotoesUpdate(false);
+        }
+    }//GEN-LAST:event_tblPessoaMouseClicked
+
+    private void popularTabelaPessoa() {
+        preencherArrayPessoas();
+
+        //mostrar dados na tabela
+        Object[] cabecalho = {
+            "Nome",
+            "Apelido",
+            "e-mail",
+            "Telefone"
+        };
+
+        DefaultTableModel model = new DefaultTableModel(cabecalho, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        for (Pessoa pessoa : pessoas) {
+            Object[] row = {
+                pessoa.getNome(),
+                pessoa.getApelido(),
+                pessoa.getEmail(),
+                pessoa.getTelefone()
+            };
+
+            model.addRow(row);
+        }
+
+        tblPessoa.setModel(model);
+
+        TableColumn coluna = null;
+        for (int i = 0; i < tblPessoa.getColumnCount(); i++) {
+            coluna = tblPessoa.getColumnModel().getColumn(i);
+            coluna.setResizable(false);
+
+            switch (i) {
+                case 0:
+                    coluna.setMaxWidth(400);
+                    break;
+                case 1:
+                    coluna.setMaxWidth(150);
+                    break;
+                case 2:
+                    coluna.setMaxWidth(300);
+                    break;
+                case 3:
+                    coluna.setMaxWidth(150);
+                    break;
+            }
+        }
+    }
 
     public void focoListagem() {
         TbpPessoa.setSelectedIndex(0);
@@ -359,8 +451,10 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
 
     private void atualizar() {
         PessoaDAO pessoaDAO = new PessoaDAO();
+        
+        Pessoa pessoa = criarEntidade();
 
-        if (pessoaDAO.atualizar(pessoaSelecionada) == null) {
+        if (pessoaDAO.atualizar(pessoa) == null) {
             limparFormularioCadastro();
             JOptionPane.showMessageDialog(this, "Pessoa alterada com sucesso!");
             pessoaSelecionada = null;
@@ -375,7 +469,11 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         String email = TxtEmail.getText();
         String telefone = TxtTelefone.getText();
 
-        return new Pessoa(nome, apelido, email, telefone);
+        if (pessoaSelecionada == null) {
+            return new Pessoa(nome, apelido, email, telefone);
+        } else {
+            return new Pessoa(pessoaSelecionada.getId(), nome, apelido, email, telefone);
+        }
     }
 
     private void limparFormularioCadastro() {
@@ -385,6 +483,61 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         TxtTelefone.setText("");
 
         TxtNome.requestFocus();
+    }
+
+    private String gerarDMLPessoa() {
+        String filtroNome = TxtFiltroNome.getText();
+        String filtroApelido = TxtFiltroApelido.getText();
+
+        String dml = "SELECT * FROM pessoa WHERE id > 0 ";
+
+        if (filtroNome.length() > 0) {
+            String add = "AND nome ILIKE '%" + filtroNome + "%' ";
+            dml = dml + add;
+        }
+
+        if (filtroApelido.length() > 0) {
+            String add = "AND apelido ILIKE '%" + filtroApelido + "%' ";
+            dml = dml + add;
+        }
+
+        dml = dml + "ORDER BY nome;";
+
+        System.out.println("DML Pessoa: " + dml);
+
+        return dml;
+    }
+
+    private void preencherArrayPessoas() {
+        pessoas = new PessoaDAO().consultar(gerarDMLPessoa());
+    }
+
+    private void limparFilrosPessoa() {
+        TxtFiltroNome.setText("");
+        TxtFiltroApelido.setText("");
+    }
+
+    private void alteraBotoesUpdate(boolean setTo) {
+        BtnEditar.setEnabled(setTo);
+        BtnExcluir.setEnabled(setTo);
+    }
+
+    private void prepararParaEdicao() {
+        //pegar pessoa selecionada (em tempo real)
+        int index = tblPessoa.getSelectedRow();
+        pessoaSelecionada = new PessoaDAO().consultarId(pessoas.get(index).getId());
+
+        //preencher cadastro com dados obtidos
+        TxtNome.setText(pessoaSelecionada.getNome());
+        TxtApelido.setText(pessoaSelecionada.getApelido());
+        TxtEmail.setText(pessoaSelecionada.getEmail());
+        TxtTelefone.setText(pessoaSelecionada.getTelefone());
+
+        //mudar para aba cadastro
+        TbpPessoa.setSelectedIndex(1);
+        TxtNome.requestFocus();
+
+        alternarBotoes();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -412,6 +565,6 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblPessoa;
     // End of variables declaration//GEN-END:variables
 }
