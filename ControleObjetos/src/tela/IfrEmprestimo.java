@@ -12,6 +12,8 @@ import entidade.Pessoa;
 import entidade.TipoObjeto;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 
 /**
  *
@@ -649,11 +651,15 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     private void popularTabelaObjetos() {
         popularArrayObjetos();
 
-        limparTabelaObjetos();
-
         TipoObjetoDAO tipoObjetoDAO = new TipoObjetoDAO();
 
-        DefaultTableModel model = (DefaultTableModel) TblObjetos.getModel();
+        Object[] cabecalho = {"Tipo", "Descrição"};
+        DefaultTableModel model = new DefaultTableModel(cabecalho, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         for (Objeto objeto : objetos) {
             TipoObjeto tipo = tipoObjetoDAO.consultarId(objeto.getTipo());
@@ -667,11 +673,23 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         }
 
         TblObjetos.setModel(model);
-    }
 
-    private void limparTabelaObjetos() {
-        DefaultTableModel model = (DefaultTableModel) TblObjetos.getModel();
-        model.setRowCount(0);
+        TblObjetos.setSelectionMode(0);
+
+        TableColumn coluna = null;
+        for (int i = 0; i < TblObjetos.getColumnCount(); i++) {
+            coluna = TblObjetos.getColumnModel().getColumn(i);
+            coluna.setResizable(false);
+
+            switch (i) {
+                case 0:
+                    coluna.setMaxWidth(200);
+                    break;
+                case 1:
+                    coluna.setMaxWidth(550);
+                    break;
+            }
+        }
     }
 
     private void popularArrayPessoas() {
@@ -680,20 +698,18 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         pessoas = pessoaDAO.consultar(criarFiltroPessoa());
     }
 
-    public void limparTabelaPessoas() {
-        DefaultTableModel model = (DefaultTableModel) TblPessoas.getModel();
-
-        model.setRowCount(0);
-
-        TblPessoas.setModel(model);
-    }
 
     public void popularTabelaPessoas() {
         popularArrayPessoas();
 
-        limparTabelaPessoas();
+        Object[] cabecalho = {"Nome", "Apelido", "Telefone", "e-mail"};
 
-        DefaultTableModel model = (DefaultTableModel) TblPessoas.getModel();
+        DefaultTableModel model = new DefaultTableModel(cabecalho, 0) {
+            @Override
+            public boolean isCellEditable(int row, int collumn) {
+                return false;
+            }
+        };
 
         for (Pessoa pessoa : pessoas) {
             String nome = pessoa.getNome();
@@ -701,12 +717,35 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             String telefone = pessoa.getTelefone();
             String email = pessoa.getEmail();
 
-            String[] row = {nome, apelido, telefone, email};
+            Object[] row = {nome, apelido, telefone, email};
 
             model.addRow(row);
         }
 
         TblPessoas.setModel(model);
+
+        TblPessoas.setSelectionMode(0);
+
+        TableColumn coluna = null;
+        for (int i = 0; i < TblPessoas.getColumnCount(); i++) {
+            coluna = TblPessoas.getColumnModel().getColumn(i);
+            coluna.setResizable(false);
+
+            switch (i) {
+                case 0:
+                    coluna.setMaxWidth(350);
+                    break;
+                case 1:
+                    coluna.setMaxWidth(200);
+                    break;
+                case 2:
+                    coluna.setMaxWidth(150);
+                    break;
+                case 3:
+                    coluna.setMaxWidth(350);
+                    break;
+            }
+        }
     }
 
     private String criarFiltroPessoa() {
@@ -777,6 +816,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         TxtTipoObjeto.setText(tipoDesc);
         TxtDescricao.setText(objetoSelecionado.getTitulo());
+        TxtDescricao.setCaretPosition(0);
         TxtAutor.setText(objetoSelecionado.getAutor());
         TxtEditora.setText(objetoSelecionado.getPublisher());
     }
@@ -785,14 +825,14 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         TxtNome.setText(pessoaSelecionada.getNome());
         TxtApelido.setText(pessoaSelecionada.getApelido());
     }
-    
+
     private void limparFiltroObjeto() {
         CbbTipoObjeto.setSelectedIndex(0);
         TxtFiltroDescricao.setText("");
         TxtFiltroAutor.setText("");
         TxtFiltroPublisher.setText("");
     }
-    
+
     private void limparFiltroPessoa() {
         TxtFiltroNome.setText("");
         TxtFiltroApelido.setText("");
