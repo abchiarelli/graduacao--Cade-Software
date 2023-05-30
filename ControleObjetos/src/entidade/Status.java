@@ -11,24 +11,24 @@ package entidade;
 public class Status {
     private int id;
     private String descricao;
-    private char tipo;
+    private int tipo;
 
-    public Status(int id, String descricao, char tipo) {
+    public Status(int id, String descricao, int tipo) {
         this.id = id;
         this.descricao = descricao;
         this.tipo = tipo;
     }
 
-    public Status(String descricao, char tipo) {
+    public Status(String descricao, int tipo) {
         this.descricao = descricao;
         this.tipo = tipo;
     }
 
-    public char getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
