@@ -5,14 +5,20 @@
 package tela;
 
 import DAO.ObjetoDAO;
+import DAO.StatusDAO;
 import DAO.TipoObjetoDAO;
+import apoio.ComboItem;
+import apoio.CombosDAO;
 import entidade.Objeto;
+import entidade.Status;
 import entidade.TipoObjeto;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -21,6 +27,7 @@ import javax.swing.border.Border;
 public class IfrObjeto extends javax.swing.JInternalFrame {
 
     private ArrayList<TipoObjeto> tiposObjeto = new ArrayList<>();
+    private ArrayList<Objeto> objetos = new ArrayList<>();
 
     /**
      * Creates new form IfrObjeto
@@ -28,7 +35,10 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     public IfrObjeto() {
         initComponents();
 
-        preencheComboTiposObjeto();
+        new CombosDAO().popularComboBox("tipo_objeto", cbbFiltroTipo);
+        new CombosDAO().popularComboBox("status", cbbFiltroStatus, "WHERE tipo = 0 ");
+        
+        popularTabela();
     }
 
     /**
@@ -43,18 +53,18 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         TbpObjeto = new javax.swing.JTabbedPane();
         PnlListagem = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblListagem = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbbFiltroTipo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbbFiltroStatus = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        TxfFilDescricao = new javax.swing.JTextField();
+        txtFiltroDescricao = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        TxfFiltroAutor = new javax.swing.JTextField();
+        txtFiltroAutor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtFiltroEditora = new javax.swing.JTextField();
         PnlCadastrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -83,30 +93,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Tipo", "Título/Descrição", "Situação"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblListagem);
 
         jLabel6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel6.setText("Filtros:");
@@ -135,11 +122,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                             .addGroup(PnlListagemLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbbFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbbFiltroStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PnlListagemLayout.createSequentialGroup()
                                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10)
@@ -147,9 +134,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel11))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TxfFilDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(TxfFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3))))))
+                                    .addComponent(txtFiltroDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                    .addComponent(txtFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFiltroEditora))))))
                 .addContainerGap(84, Short.MAX_VALUE))
             .addGroup(PnlListagemLayout.createSequentialGroup()
                 .addComponent(jScrollPane1)
@@ -165,21 +152,21 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbFiltroStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(TxfFilDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFiltroDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(TxfFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFiltroEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -277,6 +264,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         });
 
         BtnBuscar.setText("Buscar");
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
+            }
+        });
 
         BtnEditar.setText("Editar");
         BtnEditar.setEnabled(false);
@@ -400,6 +392,10 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_TxfDescricaoFocusLost
 
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        popularTabela();
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
     public void focoCadastro() {
         TbpObjeto.setSelectedIndex(1);
         alternarBotoes();
@@ -449,7 +445,6 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         int tipo = tiposObjeto.get(CbbTipoObjeto.getSelectedIndex() - 1).getId();
         int status = 1;
 
-        //criar enditade com dados
         return new Objeto(titulo, autor, publisher, status, tipo);
     }
 
@@ -457,12 +452,77 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         ObjetoDAO objetoDAO = new ObjetoDAO();
         return objetoDAO.salvar(objeto) == null;
     }
-    
+
     private void limparFormularioCadastro() {
         TxfDescricao.setText("");
         TxfAutor.setText("");
         TxfEditora.setText("");
         CbbTipoObjeto.setSelectedIndex(0);
+    }
+
+    private void popularTabela() {
+        Object[] cabecalho = {"Tipo", "Titulo/Descrição", "Editora", "Autor", "Status"};
+
+        DefaultTableModel model = new DefaultTableModel(cabecalho, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        System.out.println("DML: " + criarFiltro());
+        
+        objetos = new ObjetoDAO().consultar(criarFiltro());
+
+        for (Objeto objeto : objetos) {
+            TipoObjeto tipo = new TipoObjetoDAO().consultarId(objeto.getTipo());
+            Status status = new StatusDAO().consultarId(objeto.getStatus());
+
+            Object[] row = {
+                tipo.getDescricao(),
+                objeto.getTitulo(),
+                objeto.getPublisher(),
+                objeto.getAutor(),
+                status.getDescricao()
+            };
+
+            model.addRow(row);
+        }
+
+        tblListagem.setModel(model);
+        
+        tblListagem.setSelectionMode(0);
+    }
+
+    private String criarFiltro() {
+        String dml = "SELECT * FROM objeto WHERE  id > 0 ";
+
+        if (cbbFiltroTipo.getSelectedIndex() > 0) {
+            String add = "AND tipo_objeto_id = " + ((ComboItem) cbbFiltroTipo.getSelectedItem()).getId() + " ";
+            dml = dml + add;
+        }
+
+        if (cbbFiltroStatus.getSelectedIndex() > 0) {
+            String add = "AND status_id = " + ((ComboItem) cbbFiltroStatus.getSelectedItem()).getId() + " ";
+            dml = dml + add;
+        }
+
+        if (txtFiltroDescricao.getText().trim().length() > 0) {
+            String add = "AND titulo ILIKE '%" + txtFiltroDescricao.getText() + "%' ";
+            dml = dml + add;
+        }
+
+        if (txtFiltroAutor.getText().trim().length() > 0) {
+            String add = "AND autor ILIKE '%" + txtFiltroAutor.getText() + "%' ";
+            dml = dml + add;
+        }
+
+        if (txtFiltroEditora.getText().trim().length() > 0) {
+            String add = "AND publisher ILIKE '%" + txtFiltroEditora.getText() + "%' ";
+            dml = dml + add;
+        }
+
+        return dml + "ORDER BY titulo;";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -480,10 +540,8 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TxfAutor;
     private javax.swing.JTextField TxfDescricao;
     private javax.swing.JTextField TxfEditora;
-    private javax.swing.JTextField TxfFilDescricao;
-    private javax.swing.JTextField TxfFiltroAutor;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> cbbFiltroStatus;
+    private javax.swing.JComboBox<String> cbbFiltroTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -497,7 +555,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tblListagem;
+    private javax.swing.JTextField txtFiltroAutor;
+    private javax.swing.JTextField txtFiltroDescricao;
+    private javax.swing.JTextField txtFiltroEditora;
     // End of variables declaration//GEN-END:variables
 }
