@@ -1,10 +1,38 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+     @Override
+    public int getWidth(ImageObserver observer) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getHeight(ImageObserver observer) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ImageProducer getSource() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Graphics getGraphics() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object getProperty(String name, ImageObserver observer) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+* Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package tela;
 
-import javax.swing.JOptionPane;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,6 +45,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
+
+        this.setExtendedState(MAXIMIZED_BOTH);
+        //this.setResizable(false);
+
+        try {
+            Image bgImg = ImageIO.read(new File("./src/img/background-image.jpg"));
+
+        } catch (Exception e) {
+        }
+
     }
 
     /**
@@ -28,7 +66,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        DtpPrincipal = new javax.swing.JDesktopPane();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/img/bg-img.jpg"));
+        Image image = icon.getImage();
+        DtpPrincipal = new javax.swing.JDesktopPane() {
+
+            public void paintComponent(Graphics g) {
+                g.drawImage(image, 0, 0, 2000, 1369, this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MitObjCadastrar = new javax.swing.JMenuItem();
@@ -44,6 +90,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Objetos");
+        setMaximumSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(1280, 720));
 
         javax.swing.GroupLayout DtpPrincipalLayout = new javax.swing.GroupLayout(DtpPrincipal);
         DtpPrincipal.setLayout(DtpPrincipalLayout);
@@ -151,45 +199,45 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void MitObjCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitObjCadastrarActionPerformed
         IfrObjeto frmObjeto = new IfrObjeto();
-               
+
         DtpPrincipal.add(frmObjeto);
-        
+
         frmObjeto.focoCadastro();
         frmObjeto.setVisible(true);
     }//GEN-LAST:event_MitObjCadastrarActionPerformed
 
     private void MitObjConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitObjConsultarActionPerformed
         IfrObjeto frmObjeto = new IfrObjeto();
-               
+
         DtpPrincipal.add(frmObjeto);
-        
+
         frmObjeto.focoListagem();
         frmObjeto.setVisible(true);
     }//GEN-LAST:event_MitObjConsultarActionPerformed
 
     private void MitPessoaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitPessoaCadastrarActionPerformed
         IfrPessoa framePessoa = new IfrPessoa();
-        
+
         DtpPrincipal.add(framePessoa);
-        
+
         framePessoa.focoCadastro();
         framePessoa.setVisible(true);
     }//GEN-LAST:event_MitPessoaCadastrarActionPerformed
 
     private void MitPessoaConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitPessoaConsultarActionPerformed
         IfrPessoa framePessoa = new IfrPessoa();
-        
+
         DtpPrincipal.add(framePessoa);
-        
+
         framePessoa.focoListagem();
         framePessoa.setVisible(true);
     }//GEN-LAST:event_MitPessoaConsultarActionPerformed
 
     private void MitEmpCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitEmpCadastrarActionPerformed
         IfrEmprestimo frameEmprestimo = new IfrEmprestimo();
-        
+
         DtpPrincipal.add(frameEmprestimo);
-        
+
         frameEmprestimo.setVisible(true);
     }//GEN-LAST:event_MitEmpCadastrarActionPerformed
 
@@ -242,5 +290,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }
