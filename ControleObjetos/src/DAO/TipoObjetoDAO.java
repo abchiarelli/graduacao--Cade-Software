@@ -28,7 +28,7 @@ public class TipoObjetoDAO implements IDAOT<TipoObjeto> {
                     + ");";
 
             int retorno = st.executeUpdate(dml);
-            
+
             return null;
         } catch (Exception e) {
             System.out.println("Erro: " + e);
@@ -39,12 +39,29 @@ public class TipoObjetoDAO implements IDAOT<TipoObjeto> {
 
     @Override
     public String atualizar(TipoObjeto o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String dml = "UPDATE tipo_objeto SET "
+                + "descricao = '" + o.getDescricao() + "' "
+                + "WHERE id = " + o.getId();
+
+        try {
+            int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+            return null;
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar: " + e);
+            return e.toString();
+        }
     }
 
     @Override
     public String excluir(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String dml = "DELETE FROM tipo_objeto WHERE id = " + id;
+        try {
+            int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+            return null;
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir Tipo de Objeto: " + e);
+            return e.toString();
+        }
     }
 
     @Override
@@ -55,7 +72,7 @@ public class TipoObjetoDAO implements IDAOT<TipoObjeto> {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
             String dml = "SELECT * FROM tipo_objeto ORDER BY descricao;";
-            
+
             System.out.println("DML: " + dml);
 
             ResultSet rs = st.executeQuery(dml);
@@ -103,7 +120,7 @@ public class TipoObjetoDAO implements IDAOT<TipoObjeto> {
     public TipoObjeto consultarId(int id) {
 
         TipoObjeto tipo = null;
-        
+
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
