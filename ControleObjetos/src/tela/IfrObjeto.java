@@ -7,18 +7,15 @@ package tela;
 import DAO.ObjetoDAO;
 import DAO.StatusDAO;
 import DAO.TipoObjetoDAO;
+import apoio.Automatizar;
 import apoio.ComboItem;
 import apoio.CombosDAO;
 import entidade.Objeto;
 import entidade.Status;
 import entidade.TipoObjeto;
-import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -28,6 +25,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
     private ArrayList<TipoObjeto> tiposObjeto = new ArrayList<>();
     private ArrayList<Objeto> objetos = new ArrayList<>();
+    private Objeto objetoSelecionado = null;
 
     /**
      * Creates new form IfrObjeto
@@ -35,9 +33,10 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     public IfrObjeto() {
         initComponents();
 
-        new CombosDAO().popularComboBox("tipo_objeto", cbbFiltroTipo);
-        new CombosDAO().popularComboBox("status", cbbFiltroStatus, "WHERE tipo = 0 ");
-        
+        new CombosDAO().popularComboBox("tipo_objeto", cmbFiltroTipo);
+        new CombosDAO().popularComboBox("status", cmbFiltroStatus, "WHERE tipo = 0 ");
+        new CombosDAO().popularComboBox("tipo_objeto", cmbTipoObjeto);
+
         popularTabela();
     }
 
@@ -56,33 +55,35 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         tblListagem = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        cbbFiltroTipo = new javax.swing.JComboBox<>();
+        cmbFiltroTipo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        cbbFiltroStatus = new javax.swing.JComboBox<>();
+        cmbFiltroStatus = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        txtFiltroDescricao = new javax.swing.JTextField();
+        tfdFiltroDescricao = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtFiltroAutor = new javax.swing.JTextField();
+        tfdFiltroAutor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtFiltroEditora = new javax.swing.JTextField();
+        tfdFiltroEditora = new javax.swing.JTextField();
         PnlCadastrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        CbbTipoObjeto = new javax.swing.JComboBox<>();
+        cmbTipoObjeto = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        TxfDescricao = new javax.swing.JTextField();
+        tfdDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        TxfAutor = new javax.swing.JTextField();
-        TxfEditora = new javax.swing.JTextField();
-        BtnNovoTipoObjeto = new javax.swing.JButton();
-        BtnCadastrar = new javax.swing.JButton();
-        BtnFechar = new javax.swing.JButton();
-        BtnBuscar = new javax.swing.JButton();
-        BtnEditar = new javax.swing.JButton();
-        BtnSalvar = new javax.swing.JButton();
+        tfdAutor = new javax.swing.JTextField();
+        tfdEditora = new javax.swing.JTextField();
+        btnNovoTipoObjeto = new javax.swing.JButton();
+        btnEditarTipoObjeto = new javax.swing.JButton();
+        btnExcluirTipoObjeto = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        BtnPerdido = new javax.swing.JButton();
+        btnPerdido = new javax.swing.JButton();
 
         setTitle("Objeto");
 
@@ -93,6 +94,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
+        tblListagem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListagemMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblListagem);
 
         jLabel6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -122,11 +128,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                             .addGroup(PnlListagemLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbbFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbbFiltroStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmbFiltroStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PnlListagemLayout.createSequentialGroup()
                                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10)
@@ -134,9 +140,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel11))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFiltroDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(txtFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFiltroEditora))))))
+                                    .addComponent(tfdFiltroDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                    .addComponent(tfdFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfdFiltroEditora))))))
                 .addContainerGap(84, Short.MAX_VALUE))
             .addGroup(PnlListagemLayout.createSequentialGroup()
                 .addComponent(jScrollPane1)
@@ -152,21 +158,21 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(cbbFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(cbbFiltroStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbFiltroStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtFiltroDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdFiltroDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(txtFiltroEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdFiltroEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -177,11 +183,22 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Tipo:");
 
+        cmbTipoObjeto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoObjetoItemStateChanged(evt);
+            }
+        });
+        cmbTipoObjeto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbTipoObjetoFocusLost(evt);
+            }
+        });
+
         jLabel3.setText("Título/Descrição:");
 
-        TxfDescricao.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfdDescricao.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                TxfDescricaoFocusLost(evt);
+                tfdDescricaoFocusLost(evt);
             }
         });
 
@@ -189,10 +206,38 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Editora/Produtora:");
 
-        BtnNovoTipoObjeto.setText("+");
-        BtnNovoTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
+        tfdAutor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfdAutorFocusLost(evt);
+            }
+        });
+
+        tfdEditora.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfdEditoraFocusLost(evt);
+            }
+        });
+
+        btnNovoTipoObjeto.setIcon(new javax.swing.ImageIcon("D:\\PARTICULAR\\FACULDADE\\2023\\2023A2\\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259\\Icones\\add-file.png")); // NOI18N
+        btnNovoTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNovoTipoObjetoActionPerformed(evt);
+                btnNovoTipoObjetoActionPerformed(evt);
+            }
+        });
+
+        btnEditarTipoObjeto.setIcon(new javax.swing.ImageIcon("D:\\PARTICULAR\\FACULDADE\\2023\\2023A2\\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259\\Icones\\pencil.png")); // NOI18N
+        btnEditarTipoObjeto.setEnabled(false);
+        btnEditarTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarTipoObjetoActionPerformed(evt);
+            }
+        });
+
+        btnExcluirTipoObjeto.setIcon(new javax.swing.ImageIcon("D:\\PARTICULAR\\FACULDADE\\2023\\2023A2\\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259\\Icones\\trash-bin.png")); // NOI18N
+        btnExcluirTipoObjeto.setEnabled(false);
+        btnExcluirTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirTipoObjetoActionPerformed(evt);
             }
         });
 
@@ -213,14 +258,18 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PnlCadastrarLayout.createSequentialGroup()
-                                .addComponent(CbbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnNovoTipoObjeto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnNovoTipoObjeto))
-                            .addComponent(TxfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(180, Short.MAX_VALUE))
+                                .addComponent(btnEditarTipoObjeto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExcluirTipoObjeto))
+                            .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         PnlCadastrarLayout.setVerticalGroup(
             PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,61 +279,63 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(CbbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnNovoTipoObjeto))
+                    .addComponent(cmbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovoTipoObjeto)
+                    .addComponent(btnEditarTipoObjeto)
+                    .addComponent(btnExcluirTipoObjeto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(TxfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(TxfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(TxfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(175, Short.MAX_VALUE))
         );
 
         TbpObjeto.addTab("Cadastrar", PnlCadastrar);
 
-        BtnCadastrar.setText("Cadastrar");
-        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCadastrarActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
-        BtnFechar.setText("Fechar");
-        BtnFechar.addActionListener(new java.awt.event.ActionListener() {
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnFecharActionPerformed(evt);
+                btnFecharActionPerformed(evt);
             }
         });
 
-        BtnBuscar.setText("Buscar");
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
-        BtnEditar.setText("Editar");
-        BtnEditar.setEnabled(false);
-        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        BtnSalvar.setText("Salvar");
-        BtnSalvar.setEnabled(false);
+        btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
 
         jSeparator1.setToolTipText("");
 
-        BtnPerdido.setText("Perdido");
-        BtnPerdido.setEnabled(false);
+        btnPerdido.setText("Perdido");
+        btnPerdido.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,17 +346,17 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TbpObjeto)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnBuscar)
+                        .addComponent(btnBuscar)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnEditar)
+                        .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnSalvar)
+                        .addComponent(btnExcluir)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnPerdido)
+                        .addComponent(btnPerdido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnCadastrar)
+                        .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnFechar))
+                        .addComponent(btnFechar))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -318,53 +369,48 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnCadastrar)
-                    .addComponent(BtnFechar)
-                    .addComponent(BtnBuscar)
-                    .addComponent(BtnEditar)
-                    .addComponent(BtnSalvar)
-                    .addComponent(BtnPerdido))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnFechar)
+                    .addComponent(btnBuscar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnPerdido))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFecharActionPerformed
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.dispose();
-    }//GEN-LAST:event_BtnFecharActionPerformed
+    }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        objetoSelecionado = objetos.get(tblListagem.getSelectedRow());
         TbpObjeto.setSelectedIndex(2);
-    }//GEN-LAST:event_BtnEditarActionPerformed
+        alterarBotoesEdicao(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void TbpObjetoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbpObjetoMouseClicked
         alternarBotoes();
+
+        if (TbpObjeto.getSelectedIndex() == 1) {
+            alterarBotoesEdicao(false);
+        }
     }//GEN-LAST:event_TbpObjetoMouseClicked
 
-    private void BtnNovoTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoTipoObjetoActionPerformed
-        String descr = JOptionPane.showInputDialog("Descrição: ");
-        if (descr != null) {
-            System.out.println("Descriçao: " + descr);
-            TipoObjeto tipo = new TipoObjeto(descr);
-            if (new TipoObjetoDAO().salvar(tipo) == null) {
-                preencheComboTiposObjeto();
-                JOptionPane.showMessageDialog(this, "Tipo de Objeto salvo!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Não foi possível criar.");
-            }
-        }
-    }//GEN-LAST:event_BtnNovoTipoObjetoActionPerformed
+    private void btnNovoTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoTipoObjetoActionPerformed
+        new DlgTipoObjeto(null, true, 0, cmbTipoObjeto).setVisible(true);
+        btnEditarTipoObjeto.setEnabled(false);
+    }//GEN-LAST:event_btnNovoTipoObjetoActionPerformed
 
-    private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
-        // pegar dados inseridos
-        if (camposPreenchidos()) {
-
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (verificarCampos()) {
+            JOptionPane.showMessageDialog(this, "Alguns campos são obrigatórios.");
+        } else {
             Objeto objeto = criarEntidade();
-
             //confirmar dados
             if (JOptionPane.showConfirmDialog(this, "Confirmar cadastro de Produto?") == 0) {
-
                 //salvar
                 if (salvar(objeto)) {
                     limparFormularioCadastro();
@@ -373,28 +419,62 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Erro ao cadastrar Objeto.");
                 }
-
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Alguns campos são obrigatórios.");
         }
 
-    }//GEN-LAST:event_BtnCadastrarActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void TxfDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxfDescricaoFocusLost
-        Border borderRed = BorderFactory.createLineBorder(Color.RED, 2);
-        Border borderGreen = BorderFactory.createLineBorder(Color.GREEN, 2);
+    private void tfdDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdDescricaoFocusLost
+        Automatizar.nome(tfdDescricao, false);
+    }//GEN-LAST:event_tfdDescricaoFocusLost
 
-        if (TxfDescricao.getText().length() == 0) {
-            TxfDescricao.setBorder(borderRed);
-        } else {
-            TxfDescricao.setBorder(borderGreen);
-        }
-    }//GEN-LAST:event_TxfDescricaoFocusLost
-
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         popularTabela();
-    }//GEN-LAST:event_BtnBuscarActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tfdEditoraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdEditoraFocusLost
+        Automatizar.nome(tfdEditora, false);
+    }//GEN-LAST:event_tfdEditoraFocusLost
+
+    private void tfdAutorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdAutorFocusLost
+        Automatizar.nome(tfdAutor, true);
+    }//GEN-LAST:event_tfdAutorFocusLost
+
+    private void cmbTipoObjetoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbTipoObjetoFocusLost
+        Automatizar.comboBox(cmbTipoObjeto, false);
+    }//GEN-LAST:event_cmbTipoObjetoFocusLost
+
+    private void btnEditarTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarTipoObjetoActionPerformed
+        ComboItem itemSelecionado = (ComboItem) cmbTipoObjeto.getSelectedItem();
+        new DlgTipoObjeto(null, true, itemSelecionado.getId(), cmbTipoObjeto).setVisible(true);
+        btnEditarTipoObjeto.setEnabled(false);
+    }//GEN-LAST:event_btnEditarTipoObjetoActionPerformed
+
+    private void cmbTipoObjetoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoObjetoItemStateChanged
+        if (cmbTipoObjeto.getSelectedIndex() > 0) {
+            btnEditarTipoObjeto.setEnabled(true);
+            btnExcluirTipoObjeto.setEnabled(true);
+        } else {
+            btnEditarTipoObjeto.setEnabled(false);
+            btnExcluirTipoObjeto.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbTipoObjetoItemStateChanged
+
+    private void tblListagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListagemMouseClicked
+        if (tblListagem.getSelectedRow() > -1) {
+            alterarBotoesEdicao(true);
+        }
+    }//GEN-LAST:event_tblListagemMouseClicked
+
+    private void btnExcluirTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirTipoObjetoActionPerformed
+        ComboItem item = (ComboItem) cmbTipoObjeto.getSelectedItem();
+        if (new TipoObjetoDAO().excluir(item.getId()) == null) {
+            JOptionPane.showMessageDialog(this, "Tipo de Objeto excluído com sucesso!");
+            new CombosDAO().popularComboBox("tipo_objeto", cmbTipoObjeto);
+        } else {
+            JOptionPane.showMessageDialog(this, "Não foi possível excluir este Tipo de Objeto.");
+        }
+    }//GEN-LAST:event_btnExcluirTipoObjetoActionPerformed
 
     public void focoCadastro() {
         TbpObjeto.setSelectedIndex(1);
@@ -406,43 +486,16 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         alternarBotoes();
     }
 
-    private void preencheArrayTiposObjeto() {
-        TipoObjetoDAO tiposDAO = new TipoObjetoDAO();
-        tiposObjeto = tiposDAO.consultarTodos();
-    }
-
-    private void preencheComboTiposObjeto() {
-        CbbTipoObjeto.removeAllItems();
-
-        preencheArrayTiposObjeto();
-
-        CbbTipoObjeto.addItem("-- Selecionar --");
-
-        for (TipoObjeto tipo : tiposObjeto) {
-            CbbTipoObjeto.addItem(tipo.getDescricao());
-        }
-    }
-
-    private boolean camposPreenchidos() {
-        boolean i = true;
-
-        if (TxfDescricao.getText().length() == 0 || TxfEditora.getText().length() == 0 || CbbTipoObjeto.getSelectedIndex() == 0) {
-            i = false;
-        }
-
-        return i;
-    }
-
     private void alternarBotoes() {
-        BtnBuscar.setEnabled(TbpObjeto.getSelectedIndex() == 0);
-        BtnCadastrar.setEnabled(TbpObjeto.getSelectedIndex() == 1);
+        btnBuscar.setEnabled(TbpObjeto.getSelectedIndex() == 0);
+        btnSalvar.setEnabled(TbpObjeto.getSelectedIndex() == 1);
     }
 
     private Objeto criarEntidade() {
-        String titulo = TxfDescricao.getText();
-        String autor = TxfAutor.getText();
-        String publisher = TxfEditora.getText();
-        int tipo = tiposObjeto.get(CbbTipoObjeto.getSelectedIndex() - 1).getId();
+        String titulo = tfdDescricao.getText();
+        String autor = tfdAutor.getText();
+        String publisher = tfdEditora.getText();
+        int tipo = tiposObjeto.get(cmbTipoObjeto.getSelectedIndex() - 1).getId();
         int status = 1;
 
         return new Objeto(titulo, autor, publisher, status, tipo);
@@ -454,13 +507,15 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }
 
     private void limparFormularioCadastro() {
-        TxfDescricao.setText("");
-        TxfAutor.setText("");
-        TxfEditora.setText("");
-        CbbTipoObjeto.setSelectedIndex(0);
+        tfdDescricao.setText("");
+        tfdAutor.setText("");
+        tfdEditora.setText("");
+        cmbTipoObjeto.setSelectedIndex(0);
     }
 
     private void popularTabela() {
+        alterarBotoesEdicao(false);
+
         Object[] cabecalho = {"Tipo", "Titulo/Descrição", "Editora", "Autor", "Status"};
 
         DefaultTableModel model = new DefaultTableModel(cabecalho, 0) {
@@ -471,7 +526,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         };
 
         System.out.println("DML: " + criarFiltro());
-        
+
         objetos = new ObjetoDAO().consultar(criarFiltro());
 
         for (Objeto objeto : objetos) {
@@ -490,58 +545,76 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         }
 
         tblListagem.setModel(model);
-        
+
         tblListagem.setSelectionMode(0);
     }
 
     private String criarFiltro() {
         String dml = "SELECT * FROM objeto WHERE  id > 0 ";
 
-        if (cbbFiltroTipo.getSelectedIndex() > 0) {
-            String add = "AND tipo_objeto_id = " + ((ComboItem) cbbFiltroTipo.getSelectedItem()).getId() + " ";
+        if (cmbFiltroTipo.getSelectedIndex() > 0) {
+            String add = "AND tipo_objeto_id = " + ((ComboItem) cmbFiltroTipo.getSelectedItem()).getId() + " ";
             dml = dml + add;
         }
 
-        if (cbbFiltroStatus.getSelectedIndex() > 0) {
-            String add = "AND status_id = " + ((ComboItem) cbbFiltroStatus.getSelectedItem()).getId() + " ";
+        if (cmbFiltroStatus.getSelectedIndex() > 0) {
+            String add = "AND status_id = " + ((ComboItem) cmbFiltroStatus.getSelectedItem()).getId() + " ";
             dml = dml + add;
         }
 
-        if (txtFiltroDescricao.getText().trim().length() > 0) {
-            String add = "AND titulo ILIKE '%" + txtFiltroDescricao.getText() + "%' ";
+        if (tfdFiltroDescricao.getText().trim().length() > 0) {
+            String add = "AND titulo ILIKE '%" + tfdFiltroDescricao.getText() + "%' ";
             dml = dml + add;
         }
 
-        if (txtFiltroAutor.getText().trim().length() > 0) {
-            String add = "AND autor ILIKE '%" + txtFiltroAutor.getText() + "%' ";
+        if (tfdFiltroAutor.getText().trim().length() > 0) {
+            String add = "AND autor ILIKE '%" + tfdFiltroAutor.getText() + "%' ";
             dml = dml + add;
         }
 
-        if (txtFiltroEditora.getText().trim().length() > 0) {
-            String add = "AND publisher ILIKE '%" + txtFiltroEditora.getText() + "%' ";
+        if (tfdFiltroEditora.getText().trim().length() > 0) {
+            String add = "AND publisher ILIKE '%" + tfdFiltroEditora.getText() + "%' ";
             dml = dml + add;
         }
 
         return dml + "ORDER BY titulo;";
     }
 
+    private boolean verificarCampos() {
+        Automatizar.nome(tfdDescricao, false);
+        Automatizar.nome(tfdEditora, false);
+        Automatizar.nome(tfdAutor, true);
+        Automatizar.comboBox(cmbTipoObjeto, false);
+
+        return (Automatizar.nome(tfdDescricao, false)
+                || Automatizar.nome(tfdEditora, false)
+                || Automatizar.nome(tfdAutor, true)
+                || Automatizar.comboBox(cmbTipoObjeto, false));
+
+    }
+
+    private void alterarBotoesEdicao(boolean setTo) {
+        btnEditar.setEnabled(setTo);
+        btnExcluir.setEnabled(setTo);
+        btnPerdido.setEnabled(setTo);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnBuscar;
-    private javax.swing.JButton BtnCadastrar;
-    private javax.swing.JButton BtnEditar;
-    private javax.swing.JButton BtnFechar;
-    private javax.swing.JButton BtnNovoTipoObjeto;
-    private javax.swing.JButton BtnPerdido;
-    private javax.swing.JButton BtnSalvar;
-    private javax.swing.JComboBox<String> CbbTipoObjeto;
     private javax.swing.JPanel PnlCadastrar;
     private javax.swing.JPanel PnlListagem;
     private javax.swing.JTabbedPane TbpObjeto;
-    private javax.swing.JTextField TxfAutor;
-    private javax.swing.JTextField TxfDescricao;
-    private javax.swing.JTextField TxfEditora;
-    private javax.swing.JComboBox<String> cbbFiltroStatus;
-    private javax.swing.JComboBox<String> cbbFiltroTipo;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEditarTipoObjeto;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnExcluirTipoObjeto;
+    private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnNovoTipoObjeto;
+    private javax.swing.JButton btnPerdido;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbFiltroStatus;
+    private javax.swing.JComboBox<String> cmbFiltroTipo;
+    private javax.swing.JComboBox<String> cmbTipoObjeto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -556,8 +629,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblListagem;
-    private javax.swing.JTextField txtFiltroAutor;
-    private javax.swing.JTextField txtFiltroDescricao;
-    private javax.swing.JTextField txtFiltroEditora;
+    private javax.swing.JTextField tfdAutor;
+    private javax.swing.JTextField tfdDescricao;
+    private javax.swing.JTextField tfdEditora;
+    private javax.swing.JTextField tfdFiltroAutor;
+    private javax.swing.JTextField tfdFiltroDescricao;
+    private javax.swing.JTextField tfdFiltroEditora;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,17 +27,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="TbpObjeto" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="BtnBuscar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BtnEditar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnSalvar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BtnPerdido" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPerdido" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="BtnCadastrar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="BtnFechar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFechar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -54,12 +54,12 @@
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnFechar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnPerdido" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFechar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPerdido" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -99,11 +99,11 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbbFiltroTipo" min="-2" pref="225" max="-2" attributes="0"/>
+                                      <Component id="cmbFiltroTipo" min="-2" pref="225" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbbFiltroStatus" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="cmbFiltroStatus" min="-2" pref="175" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
@@ -113,9 +113,9 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtFiltroDescricao" pref="300" max="32767" attributes="0"/>
-                                          <Component id="txtFiltroAutor" min="-2" pref="225" max="-2" attributes="0"/>
-                                          <Component id="txtFiltroEditora" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tfdFiltroDescricao" pref="300" max="32767" attributes="0"/>
+                                          <Component id="tfdFiltroAutor" min="-2" pref="225" max="-2" attributes="0"/>
+                                          <Component id="tfdFiltroEditora" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -139,24 +139,24 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbbFiltroTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbFiltroTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbbFiltroStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbFiltroStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFiltroDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdFiltroDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFiltroAutor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdFiltroAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFiltroEditora" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdFiltroEditora" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
@@ -172,6 +172,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tblListagem">
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblListagemMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -188,7 +191,7 @@
                 <Property name="text" type="java.lang.String" value="Tipo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbbFiltroTipo">
+            <Component class="javax.swing.JComboBox" name="cmbFiltroTipo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -203,7 +206,7 @@
                 <Property name="text" type="java.lang.String" value="Status:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbbFiltroStatus">
+            <Component class="javax.swing.JComboBox" name="cmbFiltroStatus">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -218,21 +221,21 @@
                 <Property name="text" type="java.lang.String" value="T&#xed;tulo/Descri&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFiltroDescricao">
+            <Component class="javax.swing.JTextField" name="tfdFiltroDescricao">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Autor:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFiltroAutor">
+            <Component class="javax.swing.JTextField" name="tfdFiltroAutor">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editora/Produtora:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFiltroEditora">
+            <Component class="javax.swing.JTextField" name="tfdFiltroEditora">
             </Component>
           </SubComponents>
         </Container>
@@ -262,18 +265,22 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TxfDescricao" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <Component id="tfdDescricao" min="-2" pref="300" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="CbbTipoObjeto" min="-2" pref="225" max="-2" attributes="0"/>
+                                      <Component id="cmbTipoObjeto" min="-2" pref="225" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnNovoTipoObjeto" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="BtnNovoTipoObjeto" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnEditarTipoObjeto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnExcluirTipoObjeto" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="TxfAutor" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
-                                  <Component id="TxfEditora" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <Component id="tfdAutor" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                  <Component id="tfdEditora" min="-2" pref="300" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="180" max="32767" attributes="0"/>
+                      <EmptySpace pref="93" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -285,23 +292,25 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CbbTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="BtnNovoTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnNovoTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEditarTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnExcluirTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TxfDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TxfAutor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TxfEditora" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdEditora" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="175" max="32767" attributes="0"/>
                   </Group>
@@ -322,12 +331,16 @@
                 <Property name="text" type="java.lang.String" value="Tipo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="CbbTipoObjeto">
+            <Component class="javax.swing.JComboBox" name="cmbTipoObjeto">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbTipoObjetoItemStateChanged"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cmbTipoObjetoFocusLost"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -337,9 +350,9 @@
                 <Property name="text" type="java.lang.String" value="T&#xed;tulo/Descri&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="TxfDescricao">
+            <Component class="javax.swing.JTextField" name="tfdDescricao">
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TxfDescricaoFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdDescricaoFocusLost"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -352,58 +365,88 @@
                 <Property name="text" type="java.lang.String" value="Editora/Produtora:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="TxfAutor">
+            <Component class="javax.swing.JTextField" name="tfdAutor">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdAutorFocusLost"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="TxfEditora">
+            <Component class="javax.swing.JTextField" name="tfdEditora">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdEditoraFocusLost"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="BtnNovoTipoObjeto">
+            <Component class="javax.swing.JButton" name="btnNovoTipoObjeto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="+"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\PARTICULAR\FACULDADE\2023\2023A2\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICA&#xc7;&#xd5;ES - REF 348259\Icones\add-file.png"/>
+                </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnNovoTipoObjetoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoTipoObjetoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnEditarTipoObjeto">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\PARTICULAR\FACULDADE\2023\2023A2\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICA&#xc7;&#xd5;ES - REF 348259\Icones\pencil.png"/>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarTipoObjetoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnExcluirTipoObjeto">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\PARTICULAR\FACULDADE\2023\2023A2\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICA&#xc7;&#xd5;ES - REF 348259\Icones\trash-bin.png"/>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirTipoObjetoActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="BtnCadastrar">
+    <Component class="javax.swing.JButton" name="btnSalvar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastrar"/>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCadastrarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="BtnFechar">
+    <Component class="javax.swing.JButton" name="btnFechar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnFecharActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFecharActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="BtnBuscar">
+    <Component class="javax.swing.JButton" name="btnBuscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="BtnEditar">
+    <Component class="javax.swing.JButton" name="btnEditar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEditarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="BtnSalvar">
+    <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Salvar"/>
+        <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -412,7 +455,7 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="BtnPerdido">
+    <Component class="javax.swing.JButton" name="btnPerdido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Perdido"/>
         <Property name="enabled" type="boolean" value="false"/>
