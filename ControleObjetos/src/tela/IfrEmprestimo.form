@@ -44,7 +44,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="TbpPrincipal" min="-2" max="-2" attributes="0"/>
+              <Component id="TbpPrincipal" min="-2" pref="470" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BtnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -66,9 +66,9 @@
           </Border>
         </Property>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="TbpPrincipal.setEnabledAt(2, false);"/>
-      </AuxValues>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TbpPrincipalMouseClicked"/>
+      </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -84,15 +84,148 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="695" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane3" pref="683" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Status" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel20" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cmbFiltroStatus" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="tffFiltroDataEmprestimo" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="chbFiltroDataEmprestimo" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tffFiltroDataDevolucao" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="chbFiltroDataDevolucao" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnLimparFiltros" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="439" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="190" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Status" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbFiltroStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tffFiltroDataEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chbFiltroDataEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tffFiltroDataDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLimparFiltros" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chbFiltroDataDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="122" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="tblEmprestimos">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="4" rowCount="4">
+                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="Status">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Status do Empr&#xe9;stimo:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbFiltroStatus">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel19">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data de Empr&#xe9;stimo:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel20">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data de Devolu&#xe7;&#xe3;o:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataEmprestimo">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataDevolucao">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnLimparFiltros">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/broom.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Limpar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparFiltrosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="chbFiltroDataEmprestimo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="A partir de"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="chbFiltroDataDevolucao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="A partir de"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
@@ -110,10 +243,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="TbpCadastroEmprestimo" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="BtnVoltar" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="BtnSelcionar" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSelecionar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -127,10 +260,10 @@
                       <Component id="TbpCadastroEmprestimo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BtnSelcionar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="BtnVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSelecionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -179,18 +312,19 @@
                                           <Component id="TxtFiltroDescricao" alignment="0" pref="300" max="32767" attributes="0"/>
                                           <Component id="TxtFiltroAutor" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                                           <Component id="TxtFiltroPublisher" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="CbbTipoObjeto" min="-2" pref="225" max="-2" attributes="0"/>
+                                          <Component id="cmbTipoObjeto" min="-2" pref="225" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="BtnObjLimparFiltro" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="BtnObjFiltrar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="BtnObjLimparFiltro" min="-2" max="-2" attributes="0"/>
+                                          <Component id="BtnObjFiltrar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="98" max="32767" attributes="0"/>
+                              <EmptySpace pref="151" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane1" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" pref="673" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -205,7 +339,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CbbTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -216,15 +350,15 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="TxtFiltroAutor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtnObjLimparFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="TxtFiltroPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="BtnObjLimparFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="BtnObjFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="9" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -283,7 +417,7 @@
                         <Property name="text" type="java.lang.String" value="Tipo:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="CbbTipoObjeto">
+                    <Component class="javax.swing.JComboBox" name="cmbTipoObjeto">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="0"/>
@@ -316,6 +450,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BtnObjLimparFiltro">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/img/broom.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Limpar"/>
                       </Properties>
                       <Events>
@@ -324,6 +461,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BtnObjFiltrar">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/img/loupe.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
                       <Events>
@@ -363,15 +503,17 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="TxtFiltroApelido" min="-2" pref="275" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="BtnPessoaLimparFiltro" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
                                               <Component id="BtnPessoaFiltrar" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="TxtFiltroNome" alignment="0" min="-2" pref="275" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="TxtFiltroNome" min="-2" pref="275" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="BtnPessoaLimparFiltro" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="190" max="32767" attributes="0"/>
+                              <EmptySpace pref="243" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -385,11 +527,13 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="2" attributes="0">
                                   <Group type="102" alignment="2" attributes="0">
-                                      <Component id="TxtFiltroNome" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="TxtFiltroNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="BtnPessoaLimparFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="TxtFiltroApelido" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="BtnPessoaLimparFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="BtnPessoaFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -456,6 +600,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BtnPessoaLimparFiltro">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/img/broom.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Limpar"/>
                       </Properties>
                       <Events>
@@ -464,6 +611,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BtnPessoaFiltrar">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/img/loupe.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
                       <Events>
@@ -497,8 +647,8 @@
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="TxtNome" min="-2" pref="300" max="-2" attributes="0"/>
-                                                  <Component id="TxtApelido" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                                                  <Component id="tfdNomePessoa" min="-2" pref="300" max="-2" attributes="0"/>
+                                                  <Component id="tfdApelidoPessoa" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
@@ -517,10 +667,10 @@
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="TxtDescricao" min="-2" pref="300" max="-2" attributes="0"/>
-                                                  <Component id="TxtTipoObjeto" min="-2" pref="175" max="-2" attributes="0"/>
-                                                  <Component id="TxtAutor" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
-                                                  <Component id="TxtEditora" min="-2" pref="300" max="-2" attributes="0"/>
+                                                  <Component id="tfdDescricao" min="-2" pref="300" max="-2" attributes="0"/>
+                                                  <Component id="tfdTipoObjeto" min="-2" pref="175" max="-2" attributes="0"/>
+                                                  <Component id="tfdAutor" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                                  <Component id="tfdEditora" min="-2" pref="300" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -530,7 +680,11 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jFormattedTextField1" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="tffDataEmprestimo" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="DataDevolucao" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tffDataDevolucao" min="-2" pref="80" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="262" max="32767" attributes="0"/>
@@ -545,39 +699,41 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TxtTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TxtDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TxtAutor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TxtEditora" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdEditora" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TxtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdNomePessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TxtApelido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdApelidoPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tffDataEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="DataDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tffDataDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="43" max="32767" attributes="0"/>
                           </Group>
@@ -613,22 +769,22 @@
                         <Property name="text" type="java.lang.String" value="Editora/Produtora:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TxtDescricao">
+                    <Component class="javax.swing.JTextField" name="tfdDescricao">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TxtAutor">
+                    <Component class="javax.swing.JTextField" name="tfdAutor">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TxtEditora">
+                    <Component class="javax.swing.JTextField" name="tfdEditora">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TxtTipoObjeto">
+                    <Component class="javax.swing.JTextField" name="tfdTipoObjeto">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
@@ -651,12 +807,12 @@
                         <Property name="text" type="java.lang.String" value="Apelido:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TxtNome">
+                    <Component class="javax.swing.JTextField" name="tfdNomePessoa">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="TxtApelido">
+                    <Component class="javax.swing.JTextField" name="tfdApelidoPessoa">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
@@ -666,58 +822,60 @@
                         <Property name="text" type="java.lang.String" value="Data empr&#xe9;stimo:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+                    <Component class="javax.swing.JFormattedTextField" name="tffDataEmprestimo">
                       <Properties>
-                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                          <Format format="##/##/####" subtype="-1" type="5"/>
-                        </Property>
+                        <Property name="text" type="java.lang.String" value=""/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tffDataEmprestimoFocusLost"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="DataDevolucao">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Data devolu&#xe7;&#xe3;o:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="tffDataDevolucao">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value=""/>
+                        <Property name="toolTipText" type="java.lang.String" value=""/>
+                        <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tffDataDevolucaoFocusLost"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="BtnSelcionar">
+            <Component class="javax.swing.JButton" name="btnSelecionar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Selecionar &gt;"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/right-arrow.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Selecionar"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+                <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSelcionarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelecionarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="BtnVoltar">
+            <Component class="javax.swing.JButton" name="btnVoltar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt; Voltar"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/left-arrow.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Voltar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnVoltarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel3">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Edi&#xe7;&#xe3;o/Atualiza&#xe7;&#xe3;o">
-                <Property name="tabTitle" type="java.lang.String" value="Edi&#xe7;&#xe3;o/Atualiza&#xe7;&#xe3;o"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="695" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="439" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
         </Container>
       </SubComponents>
     </Container>
@@ -725,6 +883,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnEditar">
       <Properties>
@@ -734,7 +895,11 @@
     <Component class="javax.swing.JButton" name="BtnCadastrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCadastrarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnFechar">
       <Properties>
