@@ -32,7 +32,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     ArrayList<Emprestimo> emprestimos = new ArrayList<>();
     ArrayList<Objeto> objetos = new ArrayList<>();
     ArrayList<Pessoa> pessoas = new ArrayList<>();
-    ArrayList<TipoObjeto> tiposObjeto = new ArrayList<>();
 
     Objeto objetoSelecionado = null;
     Pessoa pessoaSelecionada = null;
@@ -126,10 +125,11 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         tffDataDevolucao = new javax.swing.JFormattedTextField();
         btnSelecionar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        BtnBuscar = new javax.swing.JButton();
-        BtnEditar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         BtnCadastrar = new javax.swing.JButton();
         BtnFechar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         TbpPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         TbpPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,6 +149,11 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmprestimosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblEmprestimos);
 
         Status.setText("Status do Empréstimo:");
@@ -484,7 +489,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         jLabel17.setText("Data empréstimo:");
 
-        tffDataEmprestimo.setText("");
         tffDataEmprestimo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tffDataEmprestimoFocusLost(evt);
@@ -493,7 +497,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         DataDevolucao.setText("Data devolução:");
 
-        tffDataDevolucao.setText("");
         tffDataDevolucao.setToolTipText("");
         tffDataDevolucao.setEnabled(false);
         tffDataDevolucao.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -641,16 +644,21 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        TbpPrincipal.addTab("Cadastro", jPanel2);
+        TbpPrincipal.addTab("Manutenção", jPanel2);
 
-        BtnBuscar.setText("Buscar");
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
-        BtnEditar.setText("Editar");
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         BtnCadastrar.setText("Cadastrar");
         BtnCadastrar.setEnabled(false);
@@ -667,6 +675,14 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -678,9 +694,11 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                         .addComponent(TbpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnBuscar)
+                        .addComponent(btnBuscar)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnEditar)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -694,10 +712,11 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                 .addComponent(TbpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnBuscar)
-                    .addComponent(BtnEditar)
+                    .addComponent(btnBuscar)
+                    .addComponent(btnEditar)
                     .addComponent(BtnCadastrar)
-                    .addComponent(BtnFechar))
+                    .addComponent(BtnFechar)
+                    .addComponent(btnExcluir))
                 .addContainerGap())
         );
 
@@ -711,7 +730,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             case 0:
                 objetoSelecionado = objetos.get(TblObjetos.getSelectedRow());
                 TbpCadastroEmprestimo.setSelectedIndex(index + 1);
-                imprimeObjetoSelecionado();
+                imprimirObjetoSelecionado();
                 break;
             case 1:
                 pessoaSelecionada = pessoas.get(TblPessoas.getSelectedRow());
@@ -783,11 +802,16 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             emprestimoSelecionado = null;
             TbpCadastroEmprestimo.setSelectedIndex(0);
             BtnCadastrar.setEnabled(false);
+            tffDataDevolucao.setEnabled(false);
+            popularTabelaEmprestimos();
         }
 
         if (TbpPrincipal.getSelectedIndex() != 0) {
             limparFiltroListagem();
+            popularTabelaObjetos();
         }
+        
+        alterarBotoesGeral();
     }//GEN-LAST:event_TbpPrincipalMouseClicked
 
     private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
@@ -796,19 +820,38 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         } else {
             Emprestimo emprestimo = criarEntidade();
             if (emprestimoSelecionado == null) {
-                if (new EmprestimoDAO().salvar(emprestimo) == null) {
+                if (new EmprestimoDAO().salvar(emprestimo) == null && new ObjetoDAO().emprestar(emprestimo.getIdObjeto()) == null) {
                     JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarSucess("Empréstimo"));
                     popularTabelaEmprestimos();
+                    popularTabelaObjetos();
                 } else {
                     JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarError("Empréstimo"));
                 }
             } else {
-                if (new EmprestimoDAO().atualizar(emprestimo) == null) {
-                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
-                    popularTabelaEmprestimos();
-                    emprestimoSelecionado = null;
+                if (emprestimoSelecionado.getIdObjeto() != emprestimo.getIdObjeto()) {
+                    //devolver objeto do emprestimoSelecionado
+                    if (new EmprestimoDAO().atualizar(emprestimo) == null
+                            && new ObjetoDAO().emprestar(emprestimo.getIdObjeto()) == null
+                            && new ObjetoDAO().devolver(emprestimoSelecionado.getIdObjeto()) == null) {
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
+                        popularTabelaEmprestimos();
+                        popularTabelaObjetos();
+                        emprestimoSelecionado = null;
+                        tffDataDevolucao.setEnabled(false);
+                    } else {
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
+                    if (new EmprestimoDAO().atualizar(emprestimo) == null && new ObjetoDAO().emprestar(emprestimo.getIdObjeto()) == null) {
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
+                        popularTabelaEmprestimos();
+                        popularTabelaObjetos();
+                        emprestimoSelecionado = null;
+                        tffDataDevolucao.setEnabled(false);
+                    } else {
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
+                    }
+
                 }
             }
         }
@@ -827,9 +870,30 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         popularTabelaEmprestimos();
     }//GEN-LAST:event_btnLimparFiltrosActionPerformed
 
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         popularTabelaEmprestimos();
-    }//GEN-LAST:event_BtnBuscarActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        new DlgDataDevolucao(null, true, emprestimos.get(tblEmprestimos.getSelectedRow()), this).setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tblEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmprestimosMouseClicked
+        alterarBotoesEdicao();
+    }//GEN-LAST:event_tblEmprestimosMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (JOptionPane.showConfirmDialog(this, Formatacao.mensagemConfirmacaoExclusao("Empréstimo"), "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
+            Emprestimo emprestimo = emprestimos.get(tblEmprestimos.getSelectedRow());
+            if (new EmprestimoDAO().excluir(emprestimo.getId()) == null) {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoSucess("Empréstimo"));
+                popularTabelaEmprestimos();
+                popularTabelaObjetos();
+            } else {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoError("Empréstimo"));
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void cadastroAlternarBotoes(int index) {
         btnSelecionar.setEnabled(false);
@@ -838,7 +902,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
     private void popularTabelaObjetos() {
         btnSelecionar.setEnabled(false);
-
+      
         objetos = new ObjetoDAO().consultar(criarFiltroObjeto());
 
         TipoObjetoDAO tipoObjetoDAO = new TipoObjetoDAO();
@@ -955,7 +1019,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         String dml = "SELECT * FROM objeto WHERE status_id = 1 ";
 
         if (cmbTipoObjeto.getSelectedIndex() > 0) {
-            String add = "AND tipo_objeto_id = " + tiposObjeto.get(cmbTipoObjeto.getSelectedIndex() - 1).getId() + " ";
+            String add = "AND tipo_objeto_id = " + ((ComboItem) cmbTipoObjeto.getSelectedItem()).getId() + " ";
             dml = dml + add;
         }
 
@@ -976,12 +1040,12 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         dml = dml + "ORDER BY titulo;";
 
-        System.out.println("DML: " + dml);
+        System.out.println("Filtro Objeto cirado, DML: " + dml);
 
         return dml;
     }
 
-    private void imprimeObjetoSelecionado() {
+    private void imprimirObjetoSelecionado() {
         TipoObjetoDAO tipoObjetoDAO = new TipoObjetoDAO();
         TipoObjeto tipo = tipoObjetoDAO.consultarId(objetoSelecionado.getTipo());
 
@@ -999,8 +1063,14 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         tfdApelidoPessoa.setText(pessoaSelecionada.getApelido());
     }
 
-    private void imprimeEmprestimoSelecionado() {
+    private void imprimirEmprestimoSelecionado() {
+        pessoaSelecionada = new PessoaDAO().consultarId(emprestimoSelecionado.getIdPessoa());
+        imprimirPessoaSelecionada();
+        objetoSelecionado = new ObjetoDAO().consultarId(emprestimoSelecionado.getIdObjeto());
+        imprimirObjetoSelecionado();
 
+        tffDataEmprestimo.setText(emprestimoSelecionado.getDataEmprestimo());
+        tffDataDevolucao.setText(emprestimoSelecionado.getDataDevolucao());
     }
 
     private void limparFiltroObjeto() {
@@ -1077,7 +1147,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     }
 
     public void popularTabelaEmprestimos() {
-        BtnEditar.setEnabled(false);
+        btnEditar.setEnabled(false);
 
         emprestimos = new EmprestimoDAO().consultar(criarFiltroEmprestimo());
 
@@ -1117,10 +1187,42 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         tblEmprestimos.setModel(model);
     }
 
+    public void focoCadastro() {
+        TbpPrincipal.setSelectedIndex(1);
+    }
+
+    public void focoListagem() {
+        TbpPrincipal.setSelectedIndex(0);
+    }
+
+    public void alterarBotoesEdicao() {
+        if (TbpPrincipal.getSelectedIndex() == 0) {
+            btnExcluir.setEnabled(tblEmprestimos.getSelectedRow() > -1);
+            btnEditar.setEnabled(tblEmprestimos.getSelectedRow() > -1);
+        } else {
+            btnEditar.setEnabled(false);
+            btnEditar.setEnabled(false);
+        }
+    }
+
+    public void alterarBotoesAuxliar() {
+        btnBuscar.setEnabled(TbpPrincipal.getSelectedIndex() == 0);
+        BtnCadastrar.setEnabled(TbpPrincipal.getSelectedIndex() == 1);
+    }
+
+    public void alterarBotoesCadastro() {
+        btnSelecionar.setEnabled(false);
+        btnVoltar.setEnabled(TbpCadastroEmprestimo.getSelectedIndex() > 0);
+    }
+    
+    public void alterarBotoesGeral() {
+        alterarBotoesEdicao();
+        alterarBotoesAuxliar();
+        alterarBotoesCadastro();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnCadastrar;
-    private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnFechar;
     private javax.swing.JButton BtnObjFiltrar;
     private javax.swing.JButton BtnObjLimparFiltro;
@@ -1137,6 +1239,9 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TxtFiltroDescricao;
     private javax.swing.JTextField TxtFiltroNome;
     private javax.swing.JTextField TxtFiltroPublisher;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimparFiltros;
     private javax.swing.JButton btnSelecionar;
     private javax.swing.JButton btnVoltar;
