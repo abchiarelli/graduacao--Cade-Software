@@ -35,7 +35,7 @@ public class ObjetoDAO implements IDAOT<Objeto> {
             int retotno = st.executeUpdate(dml);
 
             return null;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("ERRO: " + e);
             return e.toString();
         }
@@ -74,7 +74,8 @@ public class ObjetoDAO implements IDAOT<Objeto> {
 
                 objetos.add(objeto);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar Objeto: " + e);
         }
 
         return objetos;
@@ -101,7 +102,8 @@ public class ObjetoDAO implements IDAOT<Objeto> {
                     objetos.add(objeto);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar Objeto: " + e);
         }
 
         return objetos;
@@ -109,7 +111,65 @@ public class ObjetoDAO implements IDAOT<Objeto> {
 
     @Override
     public Objeto consultarId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Objeto objeto = null;
+
+        try {
+            String dml = "SELECT * FROM objeto WHERE id = " + id + ";";
+
+            ResultSet rs = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(dml);
+
+            while (rs.next()) {
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String publisher = rs.getString("publisher");
+                int status = rs.getInt("status_id");
+                int tipo = rs.getInt("tipo_objeto_id");
+
+                objeto = new Objeto(id, titulo, autor, publisher, status, tipo);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar Objeto: " + e);
+        }
+
+        return objeto;
+    }
+
+    public String estaPerdido(int id) {
+        try {
+            String dml = "UPDATE objeto SET "
+                    + "status_id = 3 "
+                    + "WHERE id = " + id + ";";
+
+            int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar Objeto: " + e);
+            return e.toString();
+        }
+    }
+
+    public String desfazerPerdido(int id) {
+        try {
+            //Se NÃO TIVER Emprestimo ativo (Objeto volta como disponível (status_id = 1)
+            String dml = "UPDATE objeto SET "
+                    + "status_id = 1 "
+                    + "WHERE id = " + id + ";";
+
+            //Se TIVER Emprestimo ativo (Objeto volta como emprestado (status_id = 2)
+            /*
+                String dml = "UPDATE objeto SET "
+                    + "status_id = 2 "
+                    + "WHERE id = " + id + ";";
+             */
+            
+            int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar Objeto: " + e);
+            return e.toString();
+        }
     }
 
 }
