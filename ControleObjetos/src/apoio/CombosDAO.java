@@ -55,7 +55,7 @@ public class CombosDAO {
         try {
             String dml = "SELECT * FROM "
                     + tabela + " "
-                    + addQuery
+                    + addQuery + " "
                     + "ORDER BY 2;";
 
             resultado = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(dml);
