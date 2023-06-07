@@ -235,9 +235,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void MitEmpCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MitEmpCadastrarActionPerformed
         IfrEmprestimo frameEmprestimo = new IfrEmprestimo();
-
+        
         DtpPrincipal.add(frameEmprestimo);
-
+        
         frameEmprestimo.setVisible(true);
     }//GEN-LAST:event_MitEmpCadastrarActionPerformed
 
