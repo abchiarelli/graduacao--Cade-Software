@@ -42,6 +42,7 @@ public class EmprestimoDAO implements IDAOT<Emprestimo> {
 
     @Override
     public String atualizar(Emprestimo o) {
+        System.out.println("dataDevolucao.trim() = " + o.getDataDevolucao().trim());
         try {
             String dml = "UPDATE emprestimo SET "
                     + "objeto_id = " + o.getIdObjeto() + ", "
@@ -51,7 +52,7 @@ public class EmprestimoDAO implements IDAOT<Emprestimo> {
                     + "data_devolucao = '" + o.getDataDevolucao() + "' "
                     + "WHERE id = " + o.getId();
             
-            if (o.getDataDevolucao() == null) {
+            if (o.getDataDevolucao().trim().isEmpty()) {
                 dml = "UPDATE emprestimo SET "
                     + "objeto_id = " + o.getIdObjeto() + ", "
                     + "pessoa_id = " + o.getIdPessoa() + ", "
@@ -61,7 +62,7 @@ public class EmprestimoDAO implements IDAOT<Emprestimo> {
                     + "WHERE id = " + o.getId();
             }
 
-            System.out.println("DML: " + dml);
+            System.out.println("atualizar() DML: " + dml);
             int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
 
             return null;
