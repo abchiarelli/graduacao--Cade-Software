@@ -84,7 +84,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="594" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="614" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -99,14 +99,16 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TxtFiltroApelido" min="-2" pref="275" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="TxtFiltroApelido" min="-2" pref="275" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnLiparFiltro" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <Component id="TxtFiltroNome" min="-2" pref="275" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="BtnLiparFiltro" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -119,11 +121,13 @@
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="BtnLiparFiltro" alignment="1" min="-2" pref="62" max="-2" attributes="0"/>
                           <Group type="102" alignment="2" attributes="0">
                               <Component id="TxtFiltroNome" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                              <Component id="TxtFiltroApelido" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="TxtFiltroApelido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLiparFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="2" attributes="0">
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -210,18 +214,16 @@
             </Component>
             <Component class="javax.swing.JTextField" name="TxtFiltroApelido">
             </Component>
-            <Component class="javax.swing.JToggleButton" name="BtnLiparFiltro">
+            <Component class="javax.swing.JButton" name="btnLiparFiltro">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\PARTICULAR\FACULDADE\2023\2023A2\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICA&#xc7;&#xd5;ES - REF 348259\Icones\broom.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Limpar"/>
-                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[30, 30]"/>
-                </Property>
-                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[30, 30]"/>
-                </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnLiparFiltroActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLiparFiltroActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -250,10 +252,10 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TxtNome" alignment="0" min="-2" pref="275" max="-2" attributes="0"/>
-                                  <Component id="TxtApelido" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                                  <Component id="TxtEmail" alignment="0" min="-2" pref="275" max="-2" attributes="0"/>
-                                  <Component id="TxtTelefone" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="tfdNome" alignment="0" min="-2" pref="275" max="-2" attributes="0"/>
+                                  <Component id="tfdApelido" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="tfdEmail" alignment="0" min="-2" pref="275" max="-2" attributes="0"/>
+                                  <Component id="tffTelefone" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -261,7 +263,7 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="262" max="32767" attributes="0"/>
+                      <EmptySpace pref="282" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -273,22 +275,22 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TxtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TxtApelido" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdApelido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TxtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TxtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tffTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="111" max="32767" attributes="0"/>
                   </Group>
@@ -324,18 +326,30 @@
                 <Property name="text" type="java.lang.String" value="Telefone:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="TxtTelefone">
+            <Component class="javax.swing.JFormattedTextField" name="tffTelefone">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="(##) # ####-####" subtype="-1" type="5"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tffTelefoneFocusLost"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="TxtEmail">
+            <Component class="javax.swing.JTextField" name="tfdEmail">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdEmailFocusLost"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="TxtApelido">
+            <Component class="javax.swing.JTextField" name="tfdApelido">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdApelidoFocusLost"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="TxtNome">
+            <Component class="javax.swing.JTextField" name="tfdNome">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdNomeFocusLost"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -343,6 +357,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="BtnBuscar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/loupe.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
@@ -351,6 +368,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnEditar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/pencil.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Editar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -360,6 +380,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnSalvar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/add-file.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
@@ -368,6 +391,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnFechar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/cross.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
@@ -376,6 +402,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnExcluir">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/trash-bin.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
