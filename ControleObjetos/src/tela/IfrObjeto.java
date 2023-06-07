@@ -10,10 +10,12 @@ import DAO.TipoObjetoDAO;
 import apoio.Automatizar;
 import apoio.ComboItem;
 import apoio.CombosDAO;
+import apoio.Formatacao;
 import entidade.Objeto;
 import entidade.Status;
 import entidade.TipoObjeto;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -64,6 +66,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         tfdFiltroAutor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         tfdFiltroEditora = new javax.swing.JTextField();
+        btnLimparFiltros = new javax.swing.JButton();
         PnlCadastrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -114,6 +117,14 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Editora/Produtora:");
 
+        btnLimparFiltros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/broom.png"))); // NOI18N
+        btnLimparFiltros.setText("Limpar");
+        btnLimparFiltros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparFiltrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnlListagemLayout = new javax.swing.GroupLayout(PnlListagem);
         PnlListagem.setLayout(PnlListagemLayout);
         PnlListagemLayout.setHorizontalGroup(
@@ -142,8 +153,10 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfdFiltroDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                     .addComponent(tfdFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdFiltroEditora))))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                                    .addComponent(tfdFiltroEditora))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimparFiltros)))))
+                .addContainerGap(69, Short.MAX_VALUE))
             .addGroup(PnlListagemLayout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -172,7 +185,8 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(tfdFiltroEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdFiltroEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimparFiltros))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -218,14 +232,16 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNovoTipoObjeto.setIcon(new javax.swing.ImageIcon("D:\\PARTICULAR\\FACULDADE\\2023\\2023A2\\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259\\Icones\\add-file.png")); // NOI18N
+        btnNovoTipoObjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-file.png"))); // NOI18N
+        btnNovoTipoObjeto.setToolTipText("Novo Tipo de Objeto");
         btnNovoTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoTipoObjetoActionPerformed(evt);
             }
         });
 
-        btnEditarTipoObjeto.setIcon(new javax.swing.ImageIcon("D:\\PARTICULAR\\FACULDADE\\2023\\2023A2\\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259\\Icones\\pencil.png")); // NOI18N
+        btnEditarTipoObjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pencil.png"))); // NOI18N
+        btnEditarTipoObjeto.setToolTipText("Editar Tipo de Objeto");
         btnEditarTipoObjeto.setEnabled(false);
         btnEditarTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,7 +249,8 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExcluirTipoObjeto.setIcon(new javax.swing.ImageIcon("D:\\PARTICULAR\\FACULDADE\\2023\\2023A2\\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259\\Icones\\trash-bin.png")); // NOI18N
+        btnExcluirTipoObjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-bin.png"))); // NOI18N
+        btnExcluirTipoObjeto.setToolTipText("Excuir Tipo de Objeto");
         btnExcluirTipoObjeto.setEnabled(false);
         btnExcluirTipoObjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,6 +317,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         TbpObjeto.addTab("Cadastrar", PnlCadastrar);
 
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-file.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +325,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cross.png"))); // NOI18N
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +333,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loupe.png"))); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,6 +341,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pencil.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -329,13 +350,25 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-bin.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setToolTipText("");
 
+        btnPerdido.setIcon(new javax.swing.ImageIcon("D:\\PARTICULAR\\FACULDADE\\2023\\2023A2\\PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259\\Icones\\help.png")); // NOI18N
         btnPerdido.setText("Perdido");
         btnPerdido.setEnabled(false);
+        btnPerdido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerdidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -386,9 +419,11 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        objetoSelecionado = objetos.get(tblListagem.getSelectedRow());
-        TbpObjeto.setSelectedIndex(2);
+        objetoSelecionado = new ObjetoDAO().consultarId(objetos.get(tblListagem.getSelectedRow()).getId());
+        preencherFormularioEdicao();
+        TbpObjeto.setSelectedIndex(1);
         alterarBotoesEdicao(false);
+        alternarBotoes();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void TbpObjetoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbpObjetoMouseClicked
@@ -396,6 +431,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         if (TbpObjeto.getSelectedIndex() == 1) {
             alterarBotoesEdicao(false);
+        } else {
+            limparFormularioCadastro();
+            objetoSelecionado = null;
         }
     }//GEN-LAST:event_TbpObjetoMouseClicked
 
@@ -405,23 +443,18 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoTipoObjetoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (verificarCampos()) {
-            JOptionPane.showMessageDialog(this, "Alguns campos são obrigatórios.");
-        } else {
-            Objeto objeto = criarEntidade();
-            //confirmar dados
-            if (JOptionPane.showConfirmDialog(this, "Confirmar cadastro de Produto?") == 0) {
-                //salvar
-                if (salvar(objeto)) {
-                    limparFormularioCadastro();
-                    JOptionPane.showMessageDialog(this, "Objeto cadastrado com sucesso!");
-                    limparFormularioCadastro();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar Objeto.");
-                }
-            }
+        String msg = Formatacao.mensagemConfirmacaoAtualizar("Objeto");
+        if (objetoSelecionado == null) {
+            msg = Formatacao.mensagemConfirmacaoSalvar("Objeto");
         }
 
+        if (verificarCampos()) {
+            JOptionPane.showMessageDialog(this, Formatacao.mensagemErroPreenchimento());
+        } else {
+            if (JOptionPane.showConfirmDialog(this, msg, "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
+                salvar();
+            }
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void tfdDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdDescricaoFocusLost
@@ -476,6 +509,45 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnExcluirTipoObjetoActionPerformed
 
+    private void btnLimparFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFiltrosActionPerformed
+        limparFiltros();
+        popularTabela();
+    }//GEN-LAST:event_btnLimparFiltrosActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        Objeto objeto = objetos.get(tblListagem.getSelectedRow());
+
+        if (JOptionPane.showConfirmDialog(this, Formatacao.mensagemConfirmacaoExclusao("Objeto"), "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
+            if (new ObjetoDAO().excluir(objeto.getId()) == null) {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoSucess("Objeto"));
+            } else {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoError("Objeto"));
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnPerdidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerdidoActionPerformed
+        Objeto objeto = objetos.get(tblListagem.getSelectedRow());
+
+        if (JOptionPane.showConfirmDialog(this, Formatacao.mensagemConfirmacaoAtualizar("Objeto"), "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
+            if (objeto.getStatus() == 3) {
+                if (new ObjetoDAO().desfazerPerdido(objeto.getId()) == null) {
+                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Objeto"));
+                    popularTabela();
+                } else {
+                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Objeto"));
+                }
+            } else {
+                if (new ObjetoDAO().estaPerdido(objeto.getId()) == null) {
+                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Objeto"));
+                    popularTabela();
+                } else {
+                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Objeto"));
+                }
+            }
+        }
+    }//GEN-LAST:event_btnPerdidoActionPerformed
+
     public void focoCadastro() {
         TbpObjeto.setSelectedIndex(1);
         alternarBotoes();
@@ -495,15 +567,14 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         String titulo = tfdDescricao.getText();
         String autor = tfdAutor.getText();
         String publisher = tfdEditora.getText();
-        int tipo = tiposObjeto.get(cmbTipoObjeto.getSelectedIndex() - 1).getId();
+        int tipo = ((ComboItem) cmbTipoObjeto.getSelectedItem()).getId();
         int status = 1;
 
-        return new Objeto(titulo, autor, publisher, status, tipo);
-    }
-
-    private boolean salvar(Objeto objeto) {
-        ObjetoDAO objetoDAO = new ObjetoDAO();
-        return objetoDAO.salvar(objeto) == null;
+        if (objetoSelecionado == null) {
+            return new Objeto(titulo, autor, publisher, status, tipo);
+        } else {
+            return new Objeto(objetoSelecionado.getId(), titulo, autor, publisher, objetoSelecionado.getStatus(), tipo);
+        }
     }
 
     private void limparFormularioCadastro() {
@@ -511,6 +582,22 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         tfdAutor.setText("");
         tfdEditora.setText("");
         cmbTipoObjeto.setSelectedIndex(0);
+
+        tfdDescricao.setBackground(Formatacao.colorNeutral());
+        tfdAutor.setBackground(Formatacao.colorNeutral());
+        tfdEditora.setBackground(Formatacao.colorNeutral());
+        cmbTipoObjeto.setBorder(BorderFactory.createLineBorder(Formatacao.colorNeutral(), 0));
+
+        tfdDescricao.requestFocus();
+    }
+
+    private void preencherFormularioEdicao() {
+        tfdDescricao.setText(objetoSelecionado.getTitulo());
+        tfdAutor.setText(objetoSelecionado.getAutor());
+        tfdEditora.setText(objetoSelecionado.getPublisher());
+        new CombosDAO().definirItemCombo(cmbTipoObjeto, objetoSelecionado.getId());
+
+        tfdDescricao.requestFocus();
     }
 
     private void popularTabela() {
@@ -599,6 +686,37 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         btnPerdido.setEnabled(setTo);
     }
 
+    private void limparFiltros() {
+        tfdFiltroDescricao.setText("");
+        tfdFiltroAutor.setText("");
+        tfdFiltroEditora.setText("");
+        cmbFiltroTipo.setSelectedIndex(0);
+        cmbFiltroStatus.setSelectedIndex(0);
+    }
+
+    private void salvar() {
+        Objeto objeto = criarEntidade();
+
+        if (objetoSelecionado == null) {
+            if (new ObjetoDAO().salvar(objeto) == null) {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarSucess("Objeto"));
+                limparFormularioCadastro();
+                popularTabela();
+            } else {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarError("Objeto"));
+            }
+        } else {
+            if (new ObjetoDAO().atualizar(objeto) == null) {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Objeto"));
+                objetoSelecionado = null;
+                limparFormularioCadastro();
+                popularTabela();
+            } else {
+                JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Objeto"));
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlCadastrar;
     private javax.swing.JPanel PnlListagem;
@@ -609,6 +727,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnExcluirTipoObjeto;
     private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnLimparFiltros;
     private javax.swing.JButton btnNovoTipoObjeto;
     private javax.swing.JButton btnPerdido;
     private javax.swing.JButton btnSalvar;
