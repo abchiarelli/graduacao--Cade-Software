@@ -171,5 +171,34 @@ public class ObjetoDAO implements IDAOT<Objeto> {
             return e.toString();
         }
     }
+    
+    public String emprestar(int id) {
+        try {
+            String dml = "UPDATE objeto SET "
+                    + "status_id = 2 "
+                    + "WHERE id = " + id + ";";
 
+            int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar Objeto: " + e);
+            return e.toString();
+        }
+    }
+
+    public String devolver(int id) {
+        try {
+            String dml = "UPDATE objeto SET "
+                    + "status_id = 1 "
+                    + "WHERE id = " + id + ";";
+
+            int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Erro ao alterar Objeto: " + e);
+            return e.toString();
+        }
+    }
 }
