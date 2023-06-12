@@ -35,7 +35,7 @@ public class CombosDAO {
                     item = new ComboItem();
                     item.setId(resultado.getInt(1));
                     item.setDescricao(resultado.getString(2));
-
+                    
                     comboBox.addItem(item);
                 }
             }
