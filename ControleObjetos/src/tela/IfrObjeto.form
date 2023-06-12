@@ -279,9 +279,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tfdDescricao" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <Component id="tfdCadDescricao" min="-2" pref="300" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="cmbTipoObjeto" min="-2" pref="225" max="-2" attributes="0"/>
+                                      <Component id="cmbCadTipoObjeto" min="-2" pref="225" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnNovoTipoObjeto" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -289,8 +289,8 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnExcluirTipoObjeto" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="tfdAutor" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
-                                  <Component id="tfdEditora" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <Component id="tfdCadAutor" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                  <Component id="tfdCadEditora" min="-2" pref="300" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -306,7 +306,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbCadTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnNovoTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnEditarTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnExcluirTipoObjeto" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -314,17 +314,17 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdCadDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdAutor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdCadAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdEditora" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdCadEditora" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="175" max="32767" attributes="0"/>
                   </Group>
@@ -345,15 +345,15 @@
                 <Property name="text" type="java.lang.String" value="Tipo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbTipoObjeto">
+            <Component class="javax.swing.JComboBox" name="cmbCadTipoObjeto">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbTipoObjetoItemStateChanged"/>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cmbTipoObjetoFocusLost"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbCadTipoObjetoItemStateChanged"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cmbCadTipoObjetoFocusLost"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -364,9 +364,9 @@
                 <Property name="text" type="java.lang.String" value="T&#xed;tulo/Descri&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfdDescricao">
+            <Component class="javax.swing.JTextField" name="tfdCadDescricao">
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdDescricaoFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdCadDescricaoFocusLost"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -379,14 +379,14 @@
                 <Property name="text" type="java.lang.String" value="Editora/Produtora:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfdAutor">
+            <Component class="javax.swing.JTextField" name="tfdCadAutor">
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdAutorFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdCadAutorFocusLost"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfdEditora">
+            <Component class="javax.swing.JTextField" name="tfdCadEditora">
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdEditoraFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfdCadEditoraFocusLost"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnNovoTipoObjeto">

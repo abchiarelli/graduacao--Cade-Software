@@ -37,7 +37,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         new CombosDAO().popularComboBox("tipo_objeto", cmbFiltroTipo);
         new CombosDAO().popularComboBox("status", cmbFiltroStatus, "WHERE tipo = 0 ");
-        new CombosDAO().popularComboBox("tipo_objeto", cmbTipoObjeto);
+        new CombosDAO().popularComboBox("tipo_objeto", cmbCadTipoObjeto);
 
         popularTabela();
     }
@@ -70,13 +70,13 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         PnlCadastrar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cmbTipoObjeto = new javax.swing.JComboBox<>();
+        cmbCadTipoObjeto = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        tfdDescricao = new javax.swing.JTextField();
+        tfdCadDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        tfdAutor = new javax.swing.JTextField();
-        tfdEditora = new javax.swing.JTextField();
+        tfdCadAutor = new javax.swing.JTextField();
+        tfdCadEditora = new javax.swing.JTextField();
         btnNovoTipoObjeto = new javax.swing.JButton();
         btnEditarTipoObjeto = new javax.swing.JButton();
         btnExcluirTipoObjeto = new javax.swing.JButton();
@@ -197,22 +197,22 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Tipo:");
 
-        cmbTipoObjeto.addItemListener(new java.awt.event.ItemListener() {
+        cmbCadTipoObjeto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbTipoObjetoItemStateChanged(evt);
+                cmbCadTipoObjetoItemStateChanged(evt);
             }
         });
-        cmbTipoObjeto.addFocusListener(new java.awt.event.FocusAdapter() {
+        cmbCadTipoObjeto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                cmbTipoObjetoFocusLost(evt);
+                cmbCadTipoObjetoFocusLost(evt);
             }
         });
 
         jLabel3.setText("Título/Descrição:");
 
-        tfdDescricao.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfdCadDescricao.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tfdDescricaoFocusLost(evt);
+                tfdCadDescricaoFocusLost(evt);
             }
         });
 
@@ -220,15 +220,15 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Editora/Produtora:");
 
-        tfdAutor.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfdCadAutor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tfdAutorFocusLost(evt);
+                tfdCadAutorFocusLost(evt);
             }
         });
 
-        tfdEditora.addFocusListener(new java.awt.event.FocusAdapter() {
+        tfdCadEditora.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tfdEditoraFocusLost(evt);
+                tfdCadEditoraFocusLost(evt);
             }
         });
 
@@ -275,17 +275,17 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdCadDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PnlCadastrarLayout.createSequentialGroup()
-                                .addComponent(cmbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbCadTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnNovoTipoObjeto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEditarTipoObjeto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExcluirTipoObjeto))
-                            .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tfdCadAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdCadEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         PnlCadastrarLayout.setVerticalGroup(
@@ -296,22 +296,22 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cmbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCadTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovoTipoObjeto)
                     .addComponent(btnEditarTipoObjeto)
                     .addComponent(btnExcluirTipoObjeto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdCadDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdCadAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdCadEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(175, Short.MAX_VALUE))
         );
 
@@ -438,7 +438,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TbpObjetoMouseClicked
 
     private void btnNovoTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoTipoObjetoActionPerformed
-        new DlgTipoObjeto(null, true, 0, cmbTipoObjeto).setVisible(true);
+        new DlgTipoObjeto(null, true, 0, cmbCadTipoObjeto).setVisible(true);
         btnEditarTipoObjeto.setEnabled(false);
     }//GEN-LAST:event_btnNovoTipoObjetoActionPerformed
 
@@ -457,41 +457,41 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void tfdDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdDescricaoFocusLost
-        Automatizar.nome(tfdDescricao, false);
-    }//GEN-LAST:event_tfdDescricaoFocusLost
+    private void tfdCadDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdCadDescricaoFocusLost
+        Automatizar.nome(tfdCadDescricao, false);
+    }//GEN-LAST:event_tfdCadDescricaoFocusLost
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         popularTabela();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void tfdEditoraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdEditoraFocusLost
-        Automatizar.nome(tfdEditora, false);
-    }//GEN-LAST:event_tfdEditoraFocusLost
+    private void tfdCadEditoraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdCadEditoraFocusLost
+        Automatizar.nome(tfdCadEditora, false);
+    }//GEN-LAST:event_tfdCadEditoraFocusLost
 
-    private void tfdAutorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdAutorFocusLost
-        Automatizar.nome(tfdAutor, true);
-    }//GEN-LAST:event_tfdAutorFocusLost
+    private void tfdCadAutorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfdCadAutorFocusLost
+        Automatizar.nome(tfdCadAutor, true);
+    }//GEN-LAST:event_tfdCadAutorFocusLost
 
-    private void cmbTipoObjetoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbTipoObjetoFocusLost
-        Automatizar.comboBox(cmbTipoObjeto, false);
-    }//GEN-LAST:event_cmbTipoObjetoFocusLost
+    private void cmbCadTipoObjetoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbCadTipoObjetoFocusLost
+        Automatizar.comboBox(cmbCadTipoObjeto, false);
+    }//GEN-LAST:event_cmbCadTipoObjetoFocusLost
 
     private void btnEditarTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarTipoObjetoActionPerformed
-        ComboItem itemSelecionado = (ComboItem) cmbTipoObjeto.getSelectedItem();
-        new DlgTipoObjeto(null, true, itemSelecionado.getId(), cmbTipoObjeto).setVisible(true);
+        ComboItem itemSelecionado = (ComboItem) cmbCadTipoObjeto.getSelectedItem();
+        new DlgTipoObjeto(null, true, itemSelecionado.getId(), cmbCadTipoObjeto).setVisible(true);
         btnEditarTipoObjeto.setEnabled(false);
     }//GEN-LAST:event_btnEditarTipoObjetoActionPerformed
 
-    private void cmbTipoObjetoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoObjetoItemStateChanged
-        if (cmbTipoObjeto.getSelectedIndex() > 0) {
+    private void cmbCadTipoObjetoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCadTipoObjetoItemStateChanged
+        if (cmbCadTipoObjeto.getSelectedIndex() > 0) {
             btnEditarTipoObjeto.setEnabled(true);
             btnExcluirTipoObjeto.setEnabled(true);
         } else {
             btnEditarTipoObjeto.setEnabled(false);
             btnExcluirTipoObjeto.setEnabled(false);
         }
-    }//GEN-LAST:event_cmbTipoObjetoItemStateChanged
+    }//GEN-LAST:event_cmbCadTipoObjetoItemStateChanged
 
     private void tblListagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListagemMouseClicked
         if (tblListagem.getSelectedRow() > -1) {
@@ -500,10 +500,10 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblListagemMouseClicked
 
     private void btnExcluirTipoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirTipoObjetoActionPerformed
-        ComboItem item = (ComboItem) cmbTipoObjeto.getSelectedItem();
+        ComboItem item = (ComboItem) cmbCadTipoObjeto.getSelectedItem();
         if (new TipoObjetoDAO().excluir(item.getId()) == null) {
             JOptionPane.showMessageDialog(this, "Tipo de Objeto excluído com sucesso!");
-            new CombosDAO().popularComboBox("tipo_objeto", cmbTipoObjeto);
+            new CombosDAO().popularComboBox("tipo_objeto", cmbCadTipoObjeto);
         } else {
             JOptionPane.showMessageDialog(this, "Não foi possível excluir este Tipo de Objeto.");
         }
@@ -564,10 +564,10 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }
 
     private Objeto criarEntidade() {
-        String titulo = tfdDescricao.getText();
-        String autor = tfdAutor.getText();
-        String publisher = tfdEditora.getText();
-        int tipo = ((ComboItem) cmbTipoObjeto.getSelectedItem()).getId();
+        String titulo = tfdCadDescricao.getText();
+        String autor = tfdCadAutor.getText();
+        String publisher = tfdCadEditora.getText();
+        int tipo = ((ComboItem) cmbCadTipoObjeto.getSelectedItem()).getId();
         int status = 1;
 
         if (objetoSelecionado == null) {
@@ -578,26 +578,26 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }
 
     private void limparFormularioCadastro() {
-        tfdDescricao.setText("");
-        tfdAutor.setText("");
-        tfdEditora.setText("");
-        cmbTipoObjeto.setSelectedIndex(0);
+        tfdCadDescricao.setText("");
+        tfdCadAutor.setText("");
+        tfdCadEditora.setText("");
+        cmbCadTipoObjeto.setSelectedIndex(0);
 
-        tfdDescricao.setBackground(Formatacao.colorNeutral());
-        tfdAutor.setBackground(Formatacao.colorNeutral());
-        tfdEditora.setBackground(Formatacao.colorNeutral());
-        cmbTipoObjeto.setBorder(BorderFactory.createLineBorder(Formatacao.colorNeutral(), 0));
+        tfdCadDescricao.setBackground(Formatacao.colorNeutral());
+        tfdCadAutor.setBackground(Formatacao.colorNeutral());
+        tfdCadEditora.setBackground(Formatacao.colorNeutral());
+        cmbCadTipoObjeto.setBorder(BorderFactory.createLineBorder(Formatacao.colorNeutral(), 0));
 
-        tfdDescricao.requestFocus();
+        tfdCadDescricao.requestFocus();
     }
 
     private void preencherFormularioEdicao() {
-        tfdDescricao.setText(objetoSelecionado.getTitulo());
-        tfdAutor.setText(objetoSelecionado.getAutor());
-        tfdEditora.setText(objetoSelecionado.getPublisher());
-        new CombosDAO().definirItemCombo(cmbTipoObjeto, objetoSelecionado.getId());
+        tfdCadDescricao.setText(objetoSelecionado.getTitulo());
+        tfdCadAutor.setText(objetoSelecionado.getAutor());
+        tfdCadEditora.setText(objetoSelecionado.getPublisher());
+        new CombosDAO().definirItemCombo(cmbCadTipoObjeto, objetoSelecionado.getTipo());
 
-        tfdDescricao.requestFocus();
+        tfdCadDescricao.requestFocus();
     }
 
     private void popularTabela() {
@@ -668,15 +668,15 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     }
 
     private boolean verificarCampos() {
-        Automatizar.nome(tfdDescricao, false);
-        Automatizar.nome(tfdEditora, false);
-        Automatizar.nome(tfdAutor, true);
-        Automatizar.comboBox(cmbTipoObjeto, false);
+        Automatizar.nome(tfdCadDescricao, false);
+        Automatizar.nome(tfdCadEditora, false);
+        Automatizar.nome(tfdCadAutor, true);
+        Automatizar.comboBox(cmbCadTipoObjeto, false);
 
-        return (Automatizar.nome(tfdDescricao, false)
-                || Automatizar.nome(tfdEditora, false)
-                || Automatizar.nome(tfdAutor, true)
-                || Automatizar.comboBox(cmbTipoObjeto, false));
+        return (Automatizar.nome(tfdCadDescricao, false)
+                || Automatizar.nome(tfdCadEditora, false)
+                || Automatizar.nome(tfdCadAutor, true)
+                || Automatizar.comboBox(cmbCadTipoObjeto, false));
 
     }
 
@@ -731,9 +731,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovoTipoObjeto;
     private javax.swing.JButton btnPerdido;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbCadTipoObjeto;
     private javax.swing.JComboBox<String> cmbFiltroStatus;
     private javax.swing.JComboBox<String> cmbFiltroTipo;
-    private javax.swing.JComboBox<String> cmbTipoObjeto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -748,9 +748,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblListagem;
-    private javax.swing.JTextField tfdAutor;
-    private javax.swing.JTextField tfdDescricao;
-    private javax.swing.JTextField tfdEditora;
+    private javax.swing.JTextField tfdCadAutor;
+    private javax.swing.JTextField tfdCadDescricao;
+    private javax.swing.JTextField tfdCadEditora;
     private javax.swing.JTextField tfdFiltroAutor;
     private javax.swing.JTextField tfdFiltroDescricao;
     private javax.swing.JTextField tfdFiltroEditora;
