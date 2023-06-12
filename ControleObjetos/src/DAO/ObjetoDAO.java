@@ -43,7 +43,21 @@ public class ObjetoDAO implements IDAOT<Objeto> {
 
     @Override
     public String atualizar(Objeto o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String dml = "UPDATE objeto SET "
+                    + "titulo = '" + o.getTitulo() + "', "
+                    + "autor = '" + o.getAutor() + "', "
+                    + "publisher = '" + o.getPublisher() + "', "
+                    + "status_id = " + o.getStatus() + ", "
+                    + "tipo_objeto_id = " + o.getTipo() + " "
+                    + "WHERE id = " + o.getId() + ";";
+
+            int r = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Objeto > atualizar() Exception: " + e);
+            return e.toString();
+        }
     }
 
     @Override
@@ -162,7 +176,6 @@ public class ObjetoDAO implements IDAOT<Objeto> {
                     + "status_id = 2 "
                     + "WHERE id = " + id + ";";
              */
-            
             int retorno = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
 
             return null;
@@ -171,7 +184,7 @@ public class ObjetoDAO implements IDAOT<Objeto> {
             return e.toString();
         }
     }
-    
+
     public String emprestar(int id) {
         try {
             String dml = "UPDATE objeto SET "
@@ -199,6 +212,25 @@ public class ObjetoDAO implements IDAOT<Objeto> {
         } catch (SQLException e) {
             System.out.println("Erro ao alterar Objeto: " + e);
             return e.toString();
+        }
+    }
+    
+    public boolean estaEmprestado(int id) {
+        try {
+            String dml = "SELECT * FROM objeto "
+                    + "WHERE id = " + id + " "
+                    + "AND status_id = 2;";
+            
+            ResultSet rs = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(dml);
+            
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (SQLException e) {
+            System.out.println("Erro na consulta: " + e);
+            return false;
         }
     }
 }
