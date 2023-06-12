@@ -9,6 +9,7 @@ import DAO.ObjetoDAO;
 import apoio.Automatizar;
 import apoio.Formatacao;
 import entidade.Emprestimo;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -101,6 +102,7 @@ public class DlgDataDevolucao extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -112,16 +114,28 @@ public class DlgDataDevolucao extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, Formatacao.mensagemErroPreenchimento());
         } else {
             if (JOptionPane.showConfirmDialog(this, Formatacao.mensagemConfirmacaoAtualizar("Empréstimo"), "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
-                emprestimo.setDataDevolucao(tffDataDevolucao.getText());
-                if (new EmprestimoDAO().atualizar(emprestimo) == null && new ObjetoDAO().devolver(emprestimo.getIdObjeto()) == null) {
-                    frameMae.popularTabelaEmprestimos();
-                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
+                if (verificarDataInserida()) {
+                    emprestimo.setDataDevolucao(tffDataDevolucao.getText());
+                    if (new EmprestimoDAO().atualizar(emprestimo) == null && new ObjetoDAO().devolver(emprestimo.getIdObjeto()) == null) {
+                        frameMae.popularTabelaEmprestimos();
+                        this.dispose();
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
+                    } else {
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
+                    JOptionPane.showMessageDialog(this, "Data inserida não pode ser anterior à data de empréstimo.");
                 }
             }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private boolean verificarDataInserida() {
+        LocalDate dataInserida = Formatacao.stringToLocalDate(tffDataDevolucao.getText());
+        LocalDate dataEmprestimo = Formatacao.stringToLocalDate(emprestimo.getDataEmprestimo());
+
+        return (dataInserida.isAfter(dataEmprestimo) || dataInserida.isEqual(dataEmprestimo));
+    }
 
     /**
      * @param args the command line arguments
