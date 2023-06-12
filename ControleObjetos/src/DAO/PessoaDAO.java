@@ -45,9 +45,9 @@ public class PessoaDAO implements IDAOT<Pessoa> {
                 + "email = '" + o.getEmail() + "', "
                 + "telefone = '" + o.getTelefone() + "' "
                 + "WHERE id = " + o.getId() + ";";
-        
+
         System.out.println("DML alterar Pessoa: " + dml);
-        
+
         try {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
@@ -137,7 +137,7 @@ public class PessoaDAO implements IDAOT<Pessoa> {
         Pessoa pessoa = null;
 
         try {
-            String dml = "SELECT * FROM pessoa ORDER BY nome;";
+            String dml = "SELECT * FROM pessoa WHERE id = " + id + ";";
 
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
             ResultSet rs = st.executeQuery(dml);
