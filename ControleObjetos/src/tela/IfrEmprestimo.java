@@ -30,11 +30,9 @@ import javax.swing.table.TableColumn;
 public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
     ArrayList<Emprestimo> emprestimos = new ArrayList<>();
-    ArrayList<Objeto> objetos = new ArrayList<>();
-    ArrayList<Pessoa> pessoas = new ArrayList<>();
 
-    Objeto objetoSelecionado = null;
-    Pessoa pessoaSelecionada = null;
+    private Objeto objetoSelecionado = null;
+    private Pessoa pessoaSelecionada = null;
     Emprestimo emprestimoSelecionado = null;
 
     /**
@@ -49,9 +47,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         Formatacao.formatarData(tffFiltroDataDevolucao);
 
         popularTabelaEmprestimos();
-        popularTabelaObjetos();
-        popularTabelaPessoas();
-        new CombosDAO().popularComboBox("tipo_objeto", cmbTipoObjeto);
 
         new CombosDAO().popularComboBox("status", cmbFiltroStatus, "WHERE id >= 4");
     }
@@ -79,52 +74,26 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         chbFiltroDataEmprestimo = new javax.swing.JCheckBox();
         chbFiltroDataDevolucao = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
-        TbpCadastroEmprestimo = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TblObjetos = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        cmbTipoObjeto = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        TxtFiltroDescricao = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        TxtFiltroAutor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        TxtFiltroPublisher = new javax.swing.JTextField();
-        BtnObjLimparFiltro = new javax.swing.JButton();
-        BtnObjFiltrar = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TblPessoas = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        TxtFiltroNome = new javax.swing.JTextField();
-        TxtFiltroApelido = new javax.swing.JTextField();
-        BtnPessoaLimparFiltro = new javax.swing.JButton();
-        BtnPessoaFiltrar = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         tfdDescricao = new javax.swing.JTextField();
         tfdAutor = new javax.swing.JTextField();
         tfdEditora = new javax.swing.JTextField();
         tfdTipoObjeto = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         tfdNomePessoa = new javax.swing.JTextField();
         tfdApelidoPessoa = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         tffDataEmprestimo = new javax.swing.JFormattedTextField();
-        DataDevolucao = new javax.swing.JLabel();
+        DataDevolucao1 = new javax.swing.JLabel();
         tffDataDevolucao = new javax.swing.JFormattedTextField();
-        btnSelecionar = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
+        btnObjetoSelecionar = new javax.swing.JButton();
+        btnPessoaSelecionar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         BtnCadastrar = new javax.swing.JButton();
@@ -227,51 +196,13 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                     .addComponent(tffFiltroDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimparFiltros)
                     .addComponent(chbFiltroDataDevolucao))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         TbpPrincipal.addTab("Listagem", jPanel1);
 
-        TbpCadastroEmprestimo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        TblObjetos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Tipo", "Título/Descrição"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TblObjetos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        TblObjetos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TblObjetosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(TblObjetos);
-        if (TblObjetos.getColumnModel().getColumnCount() > 0) {
-            TblObjetos.getColumnModel().getColumn(0).setResizable(false);
-            TblObjetos.getColumnModel().getColumn(1).setResizable(false);
-            TblObjetos.getColumnModel().getColumn(1).setPreferredWidth(350);
-        }
-
         jLabel6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel6.setText("Filtros:");
+        jLabel6.setText("Objeto");
 
         jLabel7.setText("Tipo:");
 
@@ -281,193 +212,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Editora/Produtora:");
 
-        BtnObjLimparFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/broom.png"))); // NOI18N
-        BtnObjLimparFiltro.setText("Limpar");
-        BtnObjLimparFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnObjLimparFiltroActionPerformed(evt);
-            }
-        });
-
-        BtnObjFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loupe.png"))); // NOI18N
-        BtnObjFiltrar.setText("Buscar");
-        BtnObjFiltrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnObjFiltrarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TxtFiltroDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(TxtFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtFiltroPublisher)
-                            .addComponent(cmbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnObjLimparFiltro)
-                            .addComponent(BtnObjFiltrar))))
-                .addContainerGap(151, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(cmbTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(TxtFiltroDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(TxtFiltroAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnObjLimparFiltro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(TxtFiltroPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnObjFiltrar))
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-
-        TbpCadastroEmprestimo.addTab("Objeto", jPanel4);
-
-        TblPessoas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nome", "Apelido", "Telefone", "e-mail"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TblPessoasMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(TblPessoas);
-
-        jLabel12.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel12.setText("Filtros:");
-
-        jLabel13.setText("Nome:");
-
-        jLabel14.setText("Apelido:");
-
-        BtnPessoaLimparFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/broom.png"))); // NOI18N
-        BtnPessoaLimparFiltro.setText("Limpar");
-        BtnPessoaLimparFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPessoaLimparFiltroActionPerformed(evt);
-            }
-        });
-
-        BtnPessoaFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loupe.png"))); // NOI18N
-        BtnPessoaFiltrar.setText("Buscar");
-        BtnPessoaFiltrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPessoaFiltrarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(TxtFiltroApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtnPessoaFiltrar))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(TxtFiltroNome, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtnPessoaLimparFiltro)))))
-                .addContainerGap(243, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtFiltroNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnPessoaLimparFiltro))
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtFiltroApelido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnPessoaFiltrar)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14)))
-                .addContainerGap())
-        );
-
-        TbpCadastroEmprestimo.addTab("Pessoa", jPanel5);
-
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel1.setText("Objeto selecionado");
-
-        jLabel2.setText("Tipo:");
-
-        jLabel3.setText("Título/Descrição:");
-
-        jLabel5.setText("Autor:");
-
-        jLabel4.setText("Editora/Produtora:");
-
         tfdDescricao.setEnabled(false);
 
         tfdAutor.setEnabled(false);
@@ -476,145 +220,37 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         tfdTipoObjeto.setEnabled(false);
 
-        jLabel8.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel8.setText("Emprestado para");
+        jLabel18.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel18.setText("Pessoa");
 
-        jLabel15.setText("Nome:");
+        jLabel21.setText("Nome:");
 
-        jLabel16.setText("Apelido:");
+        jLabel22.setText("Apelido:");
 
         tfdNomePessoa.setEnabled(false);
 
         tfdApelidoPessoa.setEnabled(false);
 
-        jLabel17.setText("Data empréstimo:");
+        jLabel23.setText("Data empréstimo:");
 
-        tffDataEmprestimo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tffDataEmprestimoFocusLost(evt);
-            }
-        });
-
-        DataDevolucao.setText("Data devolução:");
+        DataDevolucao1.setText("Data devolução:");
 
         tffDataDevolucao.setToolTipText("");
         tffDataDevolucao.setEnabled(false);
-        tffDataDevolucao.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tffDataDevolucaoFocusLost(evt);
+
+        btnObjetoSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/box.png"))); // NOI18N
+        btnObjetoSelecionar.setText("Selecionar");
+        btnObjetoSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObjetoSelecionarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdApelidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel8)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tffDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(DataDevolucao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tffDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(262, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfdTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(tfdNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(tfdApelidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(tffDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DataDevolucao)
-                    .addComponent(tffDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        TbpCadastroEmprestimo.addTab("Empréstimo", jPanel6);
-
-        TbpCadastroEmprestimo.setEnabledAt(0, false);
-        TbpCadastroEmprestimo.setEnabledAt(1, false);
-        TbpCadastroEmprestimo.setEnabledAt(2, false);
-
-        btnSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/right-arrow.png"))); // NOI18N
-        btnSelecionar.setText("Selecionar");
-        btnSelecionar.setEnabled(false);
-        btnSelecionar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        btnSelecionar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
+        btnPessoaSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-user.png"))); // NOI18N
+        btnPessoaSelecionar.setText("Selecionar");
+        btnPessoaSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarActionPerformed(evt);
-            }
-        });
-
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/left-arrow.png"))); // NOI18N
-        btnVoltar.setText("Voltar");
-        btnVoltar.setEnabled(false);
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
+                btnPessoaSelecionarActionPerformed(evt);
             }
         });
 
@@ -625,23 +261,89 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TbpCadastroEmprestimo)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSelecionar)))
-                .addContainerGap())
+                        .addComponent(jLabel18)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPessoaSelecionar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnObjetoSelecionar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tffDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(DataDevolucao1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tffDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfdNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfdApelidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfdTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TbpCadastroEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(btnObjetoSelecionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSelecionar)
-                    .addComponent(btnVoltar))
-                .addContainerGap(7, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(tfdTipoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(tfdAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(tfdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(btnPessoaSelecionar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(tfdNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(tfdApelidoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(tffDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DataDevolucao1)
+                    .addComponent(tffDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         TbpPrincipal.addTab("Manutenção", jPanel2);
@@ -653,7 +355,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEditar.setText("Editar");
+        btnEditar.setText("Finalizar/Desfazer");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -709,109 +411,33 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TbpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TbpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnEditar)
                     .addComponent(BtnCadastrar)
                     .addComponent(BtnFechar)
                     .addComponent(btnExcluir))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-        int index = TbpCadastroEmprestimo.getSelectedIndex();
-
-        switch (index) {
-            case 0:
-                objetoSelecionado = objetos.get(TblObjetos.getSelectedRow());
-                TbpCadastroEmprestimo.setSelectedIndex(index + 1);
-                imprimirObjetoSelecionado();
-                break;
-            case 1:
-                pessoaSelecionada = pessoas.get(TblPessoas.getSelectedRow());
-                TbpCadastroEmprestimo.setSelectedIndex(index + 1);
-                tffDataEmprestimo.setText(Formatacao.getDataAtual());
-                imprimirPessoaSelecionada();
-                BtnCadastrar.setEnabled(true);
-                break;
-        }
-
-        cadastroAlternarBotoes(index + 1);
-    }//GEN-LAST:event_btnSelecionarActionPerformed
-
     private void BtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFecharActionPerformed
         this.dispose();
     }//GEN-LAST:event_BtnFecharActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        int index = TbpCadastroEmprestimo.getSelectedIndex();
-
-        if (index > 0) {
-            TbpCadastroEmprestimo.setSelectedIndex(index - 1);
-        }
-
-        if (index == 2) {
-            BtnCadastrar.setEnabled(false);
-        }
-
-        cadastroAlternarBotoes(index - 1);
-        btnSelecionar.setEnabled(false);
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void BtnObjFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObjFiltrarActionPerformed
-        popularTabelaObjetos();
-        btnSelecionar.setEnabled(false);
-    }//GEN-LAST:event_BtnObjFiltrarActionPerformed
-
-    private void TblObjetosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblObjetosMouseClicked
-        if (TblObjetos.getSelectedRow() >= 0) {
-            btnSelecionar.setEnabled(true);
-        }
-    }//GEN-LAST:event_TblObjetosMouseClicked
-
-    private void TblPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblPessoasMouseClicked
-        if (TblPessoas.getSelectedRow() >= 0) {
-            btnSelecionar.setEnabled(true);
-        }
-    }//GEN-LAST:event_TblPessoasMouseClicked
-
-    private void BtnPessoaFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPessoaFiltrarActionPerformed
-        popularTabelaPessoas();
-    }//GEN-LAST:event_BtnPessoaFiltrarActionPerformed
-
-    private void BtnObjLimparFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObjLimparFiltroActionPerformed
-        limparFiltroObjeto();
-        popularTabelaObjetos();
-    }//GEN-LAST:event_BtnObjLimparFiltroActionPerformed
-
-    private void BtnPessoaLimparFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPessoaLimparFiltroActionPerformed
-        limparFiltroPessoa();
-        popularTabelaPessoas();
-        btnSelecionar.setEnabled(false);
-    }//GEN-LAST:event_BtnPessoaLimparFiltroActionPerformed
-
     private void TbpPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbpPrincipalMouseClicked
-        if (TbpPrincipal.getSelectedIndex() != 1) {
+        if (TbpPrincipal.getSelectedIndex() == 0) {
             pessoaSelecionada = null;
             objetoSelecionado = null;
             emprestimoSelecionado = null;
-            TbpCadastroEmprestimo.setSelectedIndex(0);
-            BtnCadastrar.setEnabled(false);
-            tffDataDevolucao.setEnabled(false);
-            popularTabelaEmprestimos();
+            limparCadastro();
         }
 
-        if (TbpPrincipal.getSelectedIndex() != 0) {
-            limparFiltroListagem();
-            popularTabelaObjetos();
-        }
-        
-        alterarBotoesGeral();
+        alterarBotoesPrincipais();
     }//GEN-LAST:event_TbpPrincipalMouseClicked
 
     private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
@@ -823,7 +449,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                 if (new EmprestimoDAO().salvar(emprestimo) == null && new ObjetoDAO().emprestar(emprestimo.getIdObjeto()) == null) {
                     JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarSucess("Empréstimo"));
                     popularTabelaEmprestimos();
-                    popularTabelaObjetos();
                 } else {
                     JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarError("Empréstimo"));
                 }
@@ -835,7 +460,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                             && new ObjetoDAO().devolver(emprestimoSelecionado.getIdObjeto()) == null) {
                         JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
                         popularTabelaEmprestimos();
-                        popularTabelaObjetos();
                         emprestimoSelecionado = null;
                         tffDataDevolucao.setEnabled(false);
                     } else {
@@ -845,7 +469,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                     if (new EmprestimoDAO().atualizar(emprestimo) == null && new ObjetoDAO().emprestar(emprestimo.getIdObjeto()) == null) {
                         JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
                         popularTabelaEmprestimos();
-                        popularTabelaObjetos();
                         emprestimoSelecionado = null;
                         tffDataDevolucao.setEnabled(false);
                     } else {
@@ -857,25 +480,38 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_BtnCadastrarActionPerformed
 
-    private void tffDataEmprestimoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tffDataEmprestimoFocusLost
-        Automatizar.data(tffDataEmprestimo, false);
-    }//GEN-LAST:event_tffDataEmprestimoFocusLost
-
-    private void tffDataDevolucaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tffDataDevolucaoFocusLost
-        Automatizar.data(tffDataDevolucao, false);
-    }//GEN-LAST:event_tffDataDevolucaoFocusLost
-
     private void btnLimparFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFiltrosActionPerformed
         limparFiltroListagem();
         popularTabelaEmprestimos();
     }//GEN-LAST:event_btnLimparFiltrosActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        System.out.println("Botão BUSCAR");
         popularTabelaEmprestimos();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        new DlgDataDevolucao(null, true, emprestimos.get(tblEmprestimos.getSelectedRow()), this).setVisible(true);
+        Emprestimo emp = emprestimos.get(tblEmprestimos.getSelectedRow());
+
+        if (emp.getDataDevolucao().trim().isBlank()) {
+            new DlgDataDevolucao(null, true, emp, this).setVisible(true);
+        } else {
+            if (JOptionPane.showConfirmDialog(this, "Realmente deseja desfazer a devolução deste empréstimo?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
+                if (new ObjetoDAO().estaEmprestado(emp.getIdObjeto())) {
+                    JOptionPane.showMessageDialog(this, "Objeto já possui empréstimo cadastrado.");
+                } else {
+                    emp.setDataDevolucao("");
+                    if (new EmprestimoDAO().atualizar(emp) == null && new ObjetoDAO().emprestar(emp.getIdObjeto()) == null) {
+                        popularTabelaEmprestimos();
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
+                    } else {
+                        JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
+                    }
+                }
+            }
+        }
+
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tblEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmprestimosMouseClicked
@@ -885,167 +521,24 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, Formatacao.mensagemConfirmacaoExclusao("Empréstimo"), "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
             Emprestimo emprestimo = emprestimos.get(tblEmprestimos.getSelectedRow());
-            if (new EmprestimoDAO().excluir(emprestimo.getId()) == null) {
+            if (new EmprestimoDAO().excluir(emprestimo.getId()) == null && new ObjetoDAO().devolver(emprestimo.getIdObjeto()) == null) {
                 JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoSucess("Empréstimo"));
                 popularTabelaEmprestimos();
-                popularTabelaObjetos();
             } else {
                 JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoError("Empréstimo"));
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void cadastroAlternarBotoes(int index) {
-        btnSelecionar.setEnabled(false);
-        btnVoltar.setEnabled(index != 0);
-    }
+    private void btnObjetoSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObjetoSelecionarActionPerformed
+        new DlgBuscarObjeto(null, true, this).setVisible(true);
+    }//GEN-LAST:event_btnObjetoSelecionarActionPerformed
 
-    private void popularTabelaObjetos() {
-        btnSelecionar.setEnabled(false);
-      
-        objetos = new ObjetoDAO().consultar(criarFiltroObjeto());
+    private void btnPessoaSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaSelecionarActionPerformed
+        new DlgBuscarPessoa(null, true, this).setVisible(true);
+    }//GEN-LAST:event_btnPessoaSelecionarActionPerformed
 
-        TipoObjetoDAO tipoObjetoDAO = new TipoObjetoDAO();
-
-        Object[] cabecalho = {"Tipo", "Descrição"};
-        DefaultTableModel model = new DefaultTableModel(cabecalho, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
-        for (Objeto objeto : objetos) {
-            TipoObjeto tipo = tipoObjetoDAO.consultarId(objeto.getTipo());
-
-            String tipoDesc = tipo.getDescricao();
-            String titulo = objeto.getTitulo();
-
-            String[] row = {tipoDesc, titulo};
-
-            model.addRow(row);
-        }
-
-        TblObjetos.setModel(model);
-
-        TblObjetos.setSelectionMode(0);
-
-        TableColumn coluna = null;
-        for (int i = 0; i < TblObjetos.getColumnCount(); i++) {
-            coluna = TblObjetos.getColumnModel().getColumn(i);
-            coluna.setResizable(false);
-
-            switch (i) {
-                case 0:
-                    coluna.setMaxWidth(200);
-                    break;
-                case 1:
-                    coluna.setMaxWidth(550);
-                    break;
-            }
-        }
-    }
-
-    public void popularTabelaPessoas() {
-        btnSelecionar.setEnabled(false);
-
-        pessoas = new PessoaDAO().consultar(criarFiltroPessoa());
-
-        Object[] cabecalho = {"Nome", "Apelido", "Telefone", "e-mail"};
-
-        DefaultTableModel model = new DefaultTableModel(cabecalho, 0) {
-            @Override
-            public boolean isCellEditable(int row, int collumn) {
-                return false;
-            }
-        };
-
-        for (Pessoa pessoa : pessoas) {
-            String nome = pessoa.getNome();
-            String apelido = pessoa.getApelido();
-            String telefone = pessoa.getTelefone();
-            String email = pessoa.getEmail();
-
-            Object[] row = {nome, apelido, telefone, email};
-
-            model.addRow(row);
-        }
-
-        TblPessoas.setModel(model);
-
-        TblPessoas.setSelectionMode(0);
-
-        TableColumn coluna = null;
-        for (int i = 0; i < TblPessoas.getColumnCount(); i++) {
-            coluna = TblPessoas.getColumnModel().getColumn(i);
-            coluna.setResizable(false);
-
-            switch (i) {
-                case 0:
-                    coluna.setMaxWidth(350);
-                    break;
-                case 1:
-                    coluna.setMaxWidth(200);
-                    break;
-                case 2:
-                    coluna.setMaxWidth(150);
-                    break;
-                case 3:
-                    coluna.setMaxWidth(350);
-                    break;
-            }
-        }
-    }
-
-    private String criarFiltroPessoa() {
-        String dml = "SELECT * FROM pessoa WHERE id > 0 ";
-
-        if (TxtFiltroNome.getText().length() != 0) {
-            String add = "AND nome ILIKE '%" + TxtFiltroNome.getText() + "%' ";
-            dml = dml + add;
-        }
-
-        if (TxtFiltroApelido.getText().length() != 0) {
-            String add = "AND apelido ILIKE '%" + TxtFiltroApelido.getText() + "%' ";
-            dml = dml + add;
-        }
-
-        dml = dml + "ORDER BY nome;";
-
-        return dml;
-    }
-
-    private String criarFiltroObjeto() {
-        String dml = "SELECT * FROM objeto WHERE status_id = 1 ";
-
-        if (cmbTipoObjeto.getSelectedIndex() > 0) {
-            String add = "AND tipo_objeto_id = " + ((ComboItem) cmbTipoObjeto.getSelectedItem()).getId() + " ";
-            dml = dml + add;
-        }
-
-        if (TxtFiltroDescricao.getText().length() > 0) {
-            String add = "AND titulo ILIKE '%" + TxtFiltroDescricao.getText() + "%' ";
-            dml = dml + add;
-        }
-
-        if (TxtFiltroAutor.getText().length() > 0) {
-            String add = "AND autor ILIKE '%" + TxtFiltroAutor.getText() + "%' ";
-            dml = dml + add;
-        }
-
-        if (TxtFiltroPublisher.getText().length() > 0) {
-            String add = "AND publisher ILIKE '%" + TxtFiltroPublisher.getText() + "%' ";
-            dml = dml + add;
-        }
-
-        dml = dml + "ORDER BY titulo;";
-
-        System.out.println("Filtro Objeto cirado, DML: " + dml);
-
-        return dml;
-    }
-
-    private void imprimirObjetoSelecionado() {
+    public void imprimirObjetoSelecionado() {
         TipoObjetoDAO tipoObjetoDAO = new TipoObjetoDAO();
         TipoObjeto tipo = tipoObjetoDAO.consultarId(objetoSelecionado.getTipo());
 
@@ -1058,7 +551,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         tfdEditora.setText(objetoSelecionado.getPublisher());
     }
 
-    private void imprimirPessoaSelecionada() {
+    public void imprimirPessoaSelecionada() {
         tfdNomePessoa.setText(pessoaSelecionada.getNome());
         tfdApelidoPessoa.setText(pessoaSelecionada.getApelido());
     }
@@ -1071,18 +564,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         tffDataEmprestimo.setText(emprestimoSelecionado.getDataEmprestimo());
         tffDataDevolucao.setText(emprestimoSelecionado.getDataDevolucao());
-    }
-
-    private void limparFiltroObjeto() {
-        cmbTipoObjeto.setSelectedIndex(0);
-        TxtFiltroDescricao.setText("");
-        TxtFiltroAutor.setText("");
-        TxtFiltroPublisher.setText("");
-    }
-
-    private void limparFiltroPessoa() {
-        TxtFiltroNome.setText("");
-        TxtFiltroApelido.setText("");
     }
 
     private void limparFiltroListagem() {
@@ -1102,15 +583,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     }
 
     private Emprestimo criarEntidade() {
-        if (emprestimoSelecionado == null) {
-            return new Emprestimo(objetoSelecionado.getId(), pessoaSelecionada.getId(), 4, tffDataEmprestimo.getText());
-        } else {
-            if (!tffFiltroDataDevolucao.getText().trim().equals("/  /")) {
-                return new Emprestimo(emprestimoSelecionado.getId(), objetoSelecionado.getId(), pessoaSelecionada.getId(), 4, tffDataEmprestimo.getText());
-            } else {
-                return new Emprestimo(emprestimoSelecionado.getId(), objetoSelecionado.getId(), pessoaSelecionada.getId(), 4, tffDataEmprestimo.getText(), emprestimoSelecionado.getDataDevolucao());
-            }
-        }
+        return new Emprestimo(objetoSelecionado.getId(), pessoaSelecionada.getId(), 4, tffDataEmprestimo.getText());
     }
 
     private String criarFiltroEmprestimo() {
@@ -1196,85 +669,59 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     }
 
     public void alterarBotoesEdicao() {
-        if (TbpPrincipal.getSelectedIndex() == 0) {
-            btnExcluir.setEnabled(tblEmprestimos.getSelectedRow() > -1);
-            btnEditar.setEnabled(tblEmprestimos.getSelectedRow() > -1);
-        } else {
-            btnEditar.setEnabled(false);
-            btnEditar.setEnabled(false);
-        }
+        btnExcluir.setEnabled(tblEmprestimos.getSelectedRow() > -1);
+        btnEditar.setEnabled(tblEmprestimos.getSelectedRow() > -1);
     }
 
-    public void alterarBotoesAuxliar() {
+    private void alterarBotoesPrincipais() {
         btnBuscar.setEnabled(TbpPrincipal.getSelectedIndex() == 0);
         BtnCadastrar.setEnabled(TbpPrincipal.getSelectedIndex() == 1);
     }
 
-    public void alterarBotoesCadastro() {
-        btnSelecionar.setEnabled(false);
-        btnVoltar.setEnabled(TbpCadastroEmprestimo.getSelectedIndex() > 0);
-    }
-    
-    public void alterarBotoesGeral() {
-        alterarBotoesEdicao();
-        alterarBotoesAuxliar();
-        alterarBotoesCadastro();
+    private void limparCadastro() {
+        tfdTipoObjeto.setText("");
+        tfdDescricao.setText("");
+        tfdDescricao.setCaretPosition(0);
+        tfdAutor.setText("");
+        tfdEditora.setText("");
+
+        tfdNomePessoa.setText("");
+        tfdApelidoPessoa.setText("");
+
+        tffDataEmprestimo.setText("");
+        tffDataDevolucao.setText("");
+
+        tffDataEmprestimo.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCadastrar;
     private javax.swing.JButton BtnFechar;
-    private javax.swing.JButton BtnObjFiltrar;
-    private javax.swing.JButton BtnObjLimparFiltro;
-    private javax.swing.JButton BtnPessoaFiltrar;
-    private javax.swing.JButton BtnPessoaLimparFiltro;
-    private javax.swing.JLabel DataDevolucao;
+    private javax.swing.JLabel DataDevolucao1;
     private javax.swing.JLabel Status;
-    private javax.swing.JTable TblObjetos;
-    private javax.swing.JTable TblPessoas;
-    private javax.swing.JTabbedPane TbpCadastroEmprestimo;
     private javax.swing.JTabbedPane TbpPrincipal;
-    private javax.swing.JTextField TxtFiltroApelido;
-    private javax.swing.JTextField TxtFiltroAutor;
-    private javax.swing.JTextField TxtFiltroDescricao;
-    private javax.swing.JTextField TxtFiltroNome;
-    private javax.swing.JTextField TxtFiltroPublisher;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimparFiltros;
-    private javax.swing.JButton btnSelecionar;
-    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton btnObjetoSelecionar;
+    private javax.swing.JButton btnPessoaSelecionar;
     private javax.swing.JCheckBox chbFiltroDataDevolucao;
     private javax.swing.JCheckBox chbFiltroDataEmprestimo;
     private javax.swing.JComboBox<String> cmbFiltroStatus;
-    private javax.swing.JComboBox<String> cmbTipoObjeto;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblEmprestimos;
     private javax.swing.JTextField tfdApelidoPessoa;
@@ -1288,4 +735,12 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField tffFiltroDataDevolucao;
     private javax.swing.JFormattedTextField tffFiltroDataEmprestimo;
     // End of variables declaration//GEN-END:variables
+
+    public void setObjetoSelecionado(Objeto objetoSelecionado) {
+        this.objetoSelecionado = objetoSelecionado;
+    }
+
+    public void setPessoaSelecionada(Pessoa pessoaSelecionada) {
+        this.pessoaSelecionada = pessoaSelecionada;
+    }
 }
