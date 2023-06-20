@@ -450,6 +450,7 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         }
 
         tblPessoa.setModel(model);
+        tblPessoa.setSelectionMode(0);
 
         TableColumn coluna = null;
         for (int i = 0; i < tblPessoa.getColumnCount(); i++) {
