@@ -156,7 +156,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                                     .addComponent(tfdFiltroEditora))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnLimparFiltros)))))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
             .addGroup(PnlListagemLayout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -286,7 +286,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                                 .addComponent(btnExcluirTipoObjeto))
                             .addComponent(tfdCadAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfdCadEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         PnlCadastrarLayout.setVerticalGroup(
             PnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,7 +377,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TbpObjeto)
+                    .addComponent(TbpObjeto, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBuscar)
                         .addGap(18, 18, 18)
@@ -520,6 +520,7 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
         if (JOptionPane.showConfirmDialog(this, Formatacao.mensagemConfirmacaoExclusao("Objeto"), "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
             if (new ObjetoDAO().excluir(objeto.getId()) == null) {
                 JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoSucess("Objeto"));
+                popularTabela();
             } else {
                 JOptionPane.showMessageDialog(this, Formatacao.mensagemExclusaoError("Objeto"));
             }
