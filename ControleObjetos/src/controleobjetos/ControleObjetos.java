@@ -4,7 +4,7 @@
  */
 package controleobjetos;
 
-import tela.FrmPrincipal;
+import tela.FrmLogin;
 
 /**
  *
@@ -16,7 +16,7 @@ public class ControleObjetos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new FrmPrincipal().setVisible(true);
+        new FrmLogin().setVisible(true);
     }
     
 }
