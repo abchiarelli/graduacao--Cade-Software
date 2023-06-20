@@ -392,6 +392,7 @@ Devolução]]></text>
 				<reportElement x="730" y="0" width="70" height="25" uuid="50b68582-5472-4d8c-9fb2-8610684bd376">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7779c78a-e083-4319-8b45-c4b2a685ed65"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{data_devolucao} != null]]></printWhenExpression>
 				</reportElement>
 				<box topPadding="1" leftPadding="5" bottomPadding="1" rightPadding="5">
 					<pen lineWidth="0.25"/>
@@ -401,6 +402,16 @@ Devolução]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{data_devolucao}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="730" y="0" width="70" height="25" uuid="7a2c2214-7d8b-42b9-bb75-9df548116d34">
+					<printWhenExpression><![CDATA[$F{data_devolucao} == null]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>

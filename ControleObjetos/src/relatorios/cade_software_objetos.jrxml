@@ -84,7 +84,7 @@ ORDER BY obj.titulo]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Swis721 Hv BT"/>
 				</textElement>
-				<text><![CDATA[Somente Objetos Emprestados:]]></text>
+				<text><![CDATA[Listando Objetos pelo Status:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="170" y="0" width="140" height="40" uuid="1f535277-7702-448a-8d32-7ffb7fbe4aa5">
