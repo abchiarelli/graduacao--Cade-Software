@@ -116,6 +116,7 @@ public class DlgDataDevolucao extends javax.swing.JDialog {
             if (JOptionPane.showConfirmDialog(this, Formatacao.mensagemConfirmacaoAtualizar("Empréstimo"), "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 if (verificarDataInserida()) {
                     emprestimo.setDataDevolucao(tffDataDevolucao.getText());
+                    emprestimo.setIdStatus(5);
                     if (new EmprestimoDAO().atualizar(emprestimo) == null && new ObjetoDAO().devolver(emprestimo.getIdObjeto()) == null) {
                         frameMae.popularTabelaEmprestimos();
                         this.dispose();
