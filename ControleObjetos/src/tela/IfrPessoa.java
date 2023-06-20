@@ -493,6 +493,10 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         if (pessoaSelecionada == null) {
             if (new PessoaDAO().salvar(pessoa) == null) {
                 limparFormularioCadastro();
+                popularTabelaPessoa();
+                TbpPessoa.setSelectedIndex(0);
+                alteraBotoesUpdate(false);
+                alternarBotoes();
                 JOptionPane.showMessageDialog(this, "Pessoa cadastrada com sucesso!");
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar Pessoa.");
@@ -500,8 +504,12 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         } else {
             if (new PessoaDAO().atualizar(pessoa) == null) {
                 limparFormularioCadastro();
-                JOptionPane.showMessageDialog(this, "Pessoa alterada com sucesso!");
                 pessoaSelecionada = null;
+                popularTabelaPessoa();
+                TbpPessoa.setSelectedIndex(0);
+                alteraBotoesUpdate(false);
+                alternarBotoes();
+                JOptionPane.showMessageDialog(this, "Pessoa alterada com sucesso!");
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao alterar Pessoa.");
             }
