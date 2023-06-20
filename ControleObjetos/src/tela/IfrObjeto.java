@@ -702,6 +702,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarSucess("Objeto"));
                 limparFormularioCadastro();
                 popularTabela();
+                TbpObjeto.setSelectedIndex(0);
+                alternarBotoes();
+                alterarBotoesEdicao(false);
             } else {
                 JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarError("Objeto"));
             }
@@ -711,6 +714,9 @@ public class IfrObjeto extends javax.swing.JInternalFrame {
                 objetoSelecionado = null;
                 limparFormularioCadastro();
                 popularTabela();
+                TbpObjeto.setSelectedIndex(0);
+                alternarBotoes();
+                alterarBotoesEdicao(false);
             } else {
                 JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Objeto"));
             }
