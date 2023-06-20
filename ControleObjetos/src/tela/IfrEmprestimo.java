@@ -107,17 +107,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
-        tblEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         tblEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEmprestimosMouseClicked(evt);
@@ -462,6 +451,9 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                         popularTabelaEmprestimos();
                         emprestimoSelecionado = null;
                         tffDataDevolucao.setEnabled(false);
+                        TbpPrincipal.setSelectedIndex(0);
+                        alterarBotoesPrincipais();
+                        alterarBotoesEdicao();
                     } else {
                         JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
                     }
@@ -471,6 +463,9 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                         popularTabelaEmprestimos();
                         emprestimoSelecionado = null;
                         tffDataDevolucao.setEnabled(false);
+                        TbpPrincipal.setSelectedIndex(0);
+                        alterarBotoesPrincipais();
+                        alterarBotoesEdicao();
                     } else {
                         JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
                     }
@@ -501,6 +496,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Objeto já possui empréstimo cadastrado.");
                 } else {
                     emp.setDataDevolucao("");
+                    emp.setIdStatus(4);
                     if (new EmprestimoDAO().atualizar(emp) == null && new ObjetoDAO().emprestar(emp.getIdObjeto()) == null) {
                         popularTabelaEmprestimos();
                         JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarSucess("Empréstimo"));
@@ -620,7 +616,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     }
 
     public void popularTabelaEmprestimos() {
-        btnEditar.setEnabled(false);
+        alterarBotoesEdicao();
 
         emprestimos = new EmprestimoDAO().consultar(criarFiltroEmprestimo());
 
