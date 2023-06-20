@@ -62,7 +62,16 @@ public class ObjetoDAO implements IDAOT<Objeto> {
 
     @Override
     public String excluir(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String dml = "DELETE FROM objeto WHERE id = " + id + ";";
+            
+            int r = ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(dml);
+            
+            return null;
+        } catch (Exception e) {
+            System.out.println("Objeto > excluir() ERROR: " + e);
+            return e.toString();
+        }
     }
 
     @Override
