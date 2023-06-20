@@ -103,16 +103,34 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cmbFiltroStatus" min="-2" pref="185" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="tffFiltroDataEmprestimo" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chbFiltroDataEmprestimo" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cmbFiltroStatus" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="tffFiltroDataDevolucao" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="chbFiltroDataDevolucao" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tffFiltroDataDevolucaoDe" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tffFiltroDataEmprestimoDe" min="-2" pref="90" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tffFiltroDataDevolucaoAte" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="tffFiltroDataEmprestimoAte" min="-2" pref="90" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnLimparFiltros" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -136,15 +154,19 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tffFiltroDataEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="chbFiltroDataEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tffFiltroDataEmprestimoDe" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tffFiltroDataEmprestimoAte" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tffFiltroDataDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tffFiltroDataDevolucaoDe" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnLimparFiltros" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="chbFiltroDataDevolucao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tffFiltroDataDevolucaoAte" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="32" max="32767" attributes="0"/>
                   </Group>
@@ -196,9 +218,9 @@
                 <Property name="text" type="java.lang.String" value="Data de Devolu&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataEmprestimo">
+            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataEmprestimoDe">
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataDevolucao">
+            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataDevolucaoDe">
             </Component>
             <Component class="javax.swing.JButton" name="btnLimparFiltros">
               <Properties>
@@ -211,15 +233,29 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparFiltrosActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="chbFiltroDataEmprestimo">
+            <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="A partir de"/>
+                <Property name="text" type="java.lang.String" value="de:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="chbFiltroDataDevolucao">
+            <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="A partir de"/>
+                <Property name="text" type="java.lang.String" value="de:"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="at&#xe9;:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="at&#xe9;:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataEmprestimoAte">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="tffFiltroDataDevolucaoAte">
             </Component>
           </SubComponents>
         </Container>
@@ -471,6 +507,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnBuscar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/loupe.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
@@ -479,6 +518,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnEditar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/pencil.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Finalizar/Desfazer"/>
       </Properties>
       <Events>
@@ -487,6 +529,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnCadastrar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/add-file.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -496,6 +541,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnFechar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/cross.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
@@ -504,6 +552,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/trash-bin.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
