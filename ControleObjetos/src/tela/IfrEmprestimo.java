@@ -21,7 +21,6 @@ import entidade.TipoObjeto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -43,8 +42,10 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         Formatacao.formatarData(tffDataEmprestimo);
         Formatacao.formatarData(tffDataDevolucao);
-        Formatacao.formatarData(tffFiltroDataEmprestimo);
-        Formatacao.formatarData(tffFiltroDataDevolucao);
+        Formatacao.formatarData(tffFiltroDataEmprestimoDe);
+        Formatacao.formatarData(tffFiltroDataEmprestimoAte);
+        Formatacao.formatarData(tffFiltroDataDevolucaoDe);
+        Formatacao.formatarData(tffFiltroDataDevolucaoAte);
 
         popularTabelaEmprestimos();
 
@@ -68,11 +69,15 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         cmbFiltroStatus = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        tffFiltroDataEmprestimo = new javax.swing.JFormattedTextField();
-        tffFiltroDataDevolucao = new javax.swing.JFormattedTextField();
+        tffFiltroDataEmprestimoDe = new javax.swing.JFormattedTextField();
+        tffFiltroDataDevolucaoDe = new javax.swing.JFormattedTextField();
         btnLimparFiltros = new javax.swing.JButton();
-        chbFiltroDataEmprestimo = new javax.swing.JCheckBox();
-        chbFiltroDataDevolucao = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        tffFiltroDataEmprestimoAte = new javax.swing.JFormattedTextField();
+        tffFiltroDataDevolucaoAte = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -130,9 +135,13 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
-        chbFiltroDataEmprestimo.setText("A partir de");
+        jLabel1.setText("de:");
 
-        chbFiltroDataDevolucao.setText("A partir de");
+        jLabel2.setText("de:");
+
+        jLabel3.setText("até:");
+
+        jLabel4.setText("até:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,13 +163,26 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbFiltroStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tffFiltroDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chbFiltroDataEmprestimo))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tffFiltroDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chbFiltroDataDevolucao)
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tffFiltroDataDevolucaoDe))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tffFiltroDataEmprestimoDe, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tffFiltroDataDevolucaoAte))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tffFiltroDataEmprestimoAte, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnLimparFiltros)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -177,14 +199,18 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(tffFiltroDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chbFiltroDataEmprestimo))
+                    .addComponent(tffFiltroDataEmprestimoDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(tffFiltroDataEmprestimoAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(tffFiltroDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tffFiltroDataDevolucaoDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimparFiltros)
-                    .addComponent(chbFiltroDataDevolucao))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(tffFiltroDataDevolucaoAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -337,6 +363,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
 
         TbpPrincipal.addTab("Manutenção", jPanel2);
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loupe.png"))); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,6 +371,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pencil.png"))); // NOI18N
         btnEditar.setText("Finalizar/Desfazer");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,6 +379,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
+        BtnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-file.png"))); // NOI18N
         BtnCadastrar.setText("Cadastrar");
         BtnCadastrar.setEnabled(false);
         BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -359,6 +388,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
+        BtnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cross.png"))); // NOI18N
         BtnFechar.setText("Fechar");
         BtnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,6 +396,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash-bin.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -438,6 +469,10 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                 if (new EmprestimoDAO().salvar(emprestimo) == null && new ObjetoDAO().emprestar(emprestimo.getIdObjeto()) == null) {
                     JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarSucess("Empréstimo"));
                     popularTabelaEmprestimos();
+                    TbpPrincipal.setSelectedIndex(0);
+                    alterarBotoesPrincipais();
+                    alterarBotoesEdicao();
+                    limparCadastro();
                 } else {
                     JOptionPane.showMessageDialog(this, Formatacao.mensagemSalvarError("Empréstimo"));
                 }
@@ -454,6 +489,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                         TbpPrincipal.setSelectedIndex(0);
                         alterarBotoesPrincipais();
                         alterarBotoesEdicao();
+                        limparCadastro();
                     } else {
                         JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
                     }
@@ -466,6 +502,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
                         TbpPrincipal.setSelectedIndex(0);
                         alterarBotoesPrincipais();
                         alterarBotoesEdicao();
+                        limparCadastro();
                     } else {
                         JOptionPane.showMessageDialog(this, Formatacao.mensagemAtualizarError("Empréstimo"));
                     }
@@ -481,7 +518,6 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLimparFiltrosActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        System.out.println("Botão BUSCAR");
         popularTabelaEmprestimos();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -552,22 +588,12 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         tfdApelidoPessoa.setText(pessoaSelecionada.getApelido());
     }
 
-    private void imprimirEmprestimoSelecionado() {
-        pessoaSelecionada = new PessoaDAO().consultarId(emprestimoSelecionado.getIdPessoa());
-        imprimirPessoaSelecionada();
-        objetoSelecionado = new ObjetoDAO().consultarId(emprestimoSelecionado.getIdObjeto());
-        imprimirObjetoSelecionado();
-
-        tffDataEmprestimo.setText(emprestimoSelecionado.getDataEmprestimo());
-        tffDataDevolucao.setText(emprestimoSelecionado.getDataDevolucao());
-    }
-
     private void limparFiltroListagem() {
-        tffFiltroDataDevolucao.setText("");
-        tffFiltroDataEmprestimo.setText("");
+        tffFiltroDataDevolucaoDe.setText("");
+        tffFiltroDataEmprestimoDe.setText("");
         cmbFiltroStatus.setSelectedIndex(0);
-        chbFiltroDataDevolucao.setSelected(false);
-        chbFiltroDataEmprestimo.setSelected(false);
+        tffFiltroDataDevolucaoAte.setText("");
+        tffFiltroDataEmprestimoAte.setText("");
     }
 
     private boolean verificarCampos() {
@@ -593,21 +619,25 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
             dml += add;
         }
 
-        if (!tffFiltroDataEmprestimo.getText().trim().equals("/  /")) {
-            if (Validacao.validarDataFormatada(tffFiltroDataEmprestimo.getText())) {
-                String add = "AND data_emprestimo = '" + Formatacao.ajustaDataAMD(tffFiltroDataEmprestimo.getText()) + "' ";
-                if (chbFiltroDataEmprestimo.isSelected()) {
-                    add = "AND data_emprestimo >= '" + Formatacao.ajustaDataAMD(tffFiltroDataEmprestimo.getText()) + "' ";
+        if (!tffFiltroDataEmprestimoDe.getText().trim().equals("/  /")) {
+            if (Validacao.validarDataFormatada(tffFiltroDataEmprestimoDe.getText())) {
+                String add = "AND data_emprestimo >= '" + tffFiltroDataEmprestimoDe.getText() + "' ";
+                if (!tffFiltroDataEmprestimoAte.getText().trim().equals("/  /")) {
+                    if(Validacao.validarDataFormatada(tffFiltroDataEmprestimoAte.getText())) {
+                        add = "AND data_emprestimo BETWEEN '" + tffFiltroDataEmprestimoDe.getText() + "' AND '" + tffFiltroDataEmprestimoAte.getText() + "' ";
+                    }
                 }
                 dml += add;
             }
         }
 
-        if (!tffFiltroDataDevolucao.getText().trim().equals("/  /")) {
-            if (Validacao.validarDataFormatada(tffFiltroDataDevolucao.getText())) {
-                String add = "AND data_devolucao = '" + Formatacao.ajustaDataAMD(chbFiltroDataDevolucao.getText()) + "' ";
-                if (chbFiltroDataDevolucao.isSelected()) {
-                    add = "AND data_emprestimo >= '" + Formatacao.ajustaDataAMD(chbFiltroDataDevolucao.getText()) + "' ";
+        if (!tffFiltroDataDevolucaoDe.getText().trim().equals("/  /")) {
+            if (Validacao.validarDataFormatada(tffFiltroDataDevolucaoDe.getText())) {
+                String add = "AND data_devolucao = '" + Formatacao.ajustaDataAMD(tffFiltroDataDevolucaoDe.getText()) + "' ";
+                if (!tffFiltroDataDevolucaoAte.getText().trim().equals("/  /")) {
+                    if(Validacao.validarDataFormatada(tffFiltroDataDevolucaoAte.getText())) {
+                        add = "AND data_devolucao = '" + tffFiltroDataDevolucaoDe.getText() + "' AND '" + tffFiltroDataDevolucaoAte.getText() + "' ";
+                    }
                 }
                 dml += add;
             }
@@ -654,6 +684,7 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
         }
 
         tblEmprestimos.setModel(model);
+        tblEmprestimos.setSelectionMode(0);
     }
 
     public void focoCadastro() {
@@ -702,17 +733,19 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimparFiltros;
     private javax.swing.JButton btnObjetoSelecionar;
     private javax.swing.JButton btnPessoaSelecionar;
-    private javax.swing.JCheckBox chbFiltroDataDevolucao;
-    private javax.swing.JCheckBox chbFiltroDataEmprestimo;
     private javax.swing.JComboBox<String> cmbFiltroStatus;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
@@ -728,8 +761,10 @@ public class IfrEmprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdTipoObjeto;
     private javax.swing.JFormattedTextField tffDataDevolucao;
     private javax.swing.JFormattedTextField tffDataEmprestimo;
-    private javax.swing.JFormattedTextField tffFiltroDataDevolucao;
-    private javax.swing.JFormattedTextField tffFiltroDataEmprestimo;
+    private javax.swing.JFormattedTextField tffFiltroDataDevolucaoAte;
+    private javax.swing.JFormattedTextField tffFiltroDataDevolucaoDe;
+    private javax.swing.JFormattedTextField tffFiltroDataEmprestimoAte;
+    private javax.swing.JFormattedTextField tffFiltroDataEmprestimoDe;
     // End of variables declaration//GEN-END:variables
 
     public void setObjetoSelecionado(Objeto objetoSelecionado) {
