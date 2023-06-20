@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cade_software_objetos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c353776-45d4-4507-8485-aeec3917aa3b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="cade_software"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="somenteEmprestado" class="java.lang.String"/>
+	<parameter name="dml" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	obj.id,
+	obj.titulo,
+	tipo.descricao AS tipo,
+	status.descricao AS obj_status
+FROM objeto obj, status, tipo_objeto tipo
+WHERE obj.tipo_objeto_id = tipo.id
+	AND obj.status_id = status.id
+	$P!{dml} 
+ORDER BY obj.titulo]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objeto"/>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objeto"/>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_objeto"/>
+	</field>
+	<field name="obj_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="obj_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="obj_status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="status"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="0" width="430" height="50" uuid="13c5950b-53a1-4c09-ba52-ce5ef8d19b8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Swis721 Hv BT" size="38" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cadê Software]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="50" width="430" height="18" uuid="d858d5b7-e64e-45ae-8c8d-3d5257cf61d7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Swis721 Lt BT" size="11"/>
+				</textElement>
+				<text><![CDATA[a software by D'Artagnan Tech]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="80" width="420" height="60" uuid="bf4f560f-e66a-497b-82ac-afe64cabaec4"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Swis721 Lt BT" size="10"/>
+				</textElement>
+				<text><![CDATA[O Cadê é uma ferramenta prática e eficiente para organizar e gerenciar seus objetos pessoais ou profissionais. Com ele, você pode cadastrar, categorizar, localizar e controlar seus objetos de forma simples e rápida.
+
+É o aplicativo ideal para quem quer ter mais praticidade e segurança na gestão de seus objetos.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="10" width="120" height="120" uuid="913ea348-943d-4053-ab57-59ec7b3ad68f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["D:/PARTICULAR/FACULDADE/2023/2023A2/PROJETO INTEGRADOR - DESENVOLVIMENTO DE APLICAÇÕES - REF 348259/PI---prog-aplicacoes---java/ControleObjetos/src/img/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="170" height="40" uuid="ced08940-e364-444c-bbba-1c8f120c4439">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Swis721 Hv BT"/>
+				</textElement>
+				<text><![CDATA[Somente Objetos Emprestados:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="0" width="140" height="40" uuid="1f535277-7702-448a-8d32-7ffb7fbe4aa5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{somenteEmprestado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="40" uuid="940de553-bd21-4d6d-8132-93d33a8c12c6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3f402347-de7d-474b-9d21-fba29562cf63"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Swis721 Hv BT"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="270" height="40" uuid="9a7e86e0-e705-439c-91ae-1af7b77817c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa270e6c-b0c7-430b-b143-718aee319fa5"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Swis721 Hv BT"/>
+				</textElement>
+				<text><![CDATA[Título/Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="120" height="40" uuid="8ca2b3d3-9bfe-4c52-ba88-5061c2bd4756">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8694edf1-841b-4858-a814-7a594e59a81e"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Swis721 Hv BT"/>
+				</textElement>
+				<text><![CDATA[Tipo do
+Objeto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="0" width="120" height="40" uuid="697ed0df-057f-4131-a26e-489d9ff65615">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fda3579e-cf28-40be-913a-413b172bbf6b"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Swis721 Hv BT"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="30" uuid="43a4ec20-c688-499d-8f0d-f06249b60bef">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3f402347-de7d-474b-9d21-fba29562cf63"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="270" height="30" uuid="58674d31-4c74-4422-8311-c50f730cb9ba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa270e6c-b0c7-430b-b143-718aee319fa5"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="120" height="30" uuid="62cc8e7f-37fc-44e3-b916-c7e08ea6fc19">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8694edf1-841b-4858-a814-7a594e59a81e"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="120" height="30" uuid="71b3fd8b-b3b1-4bfa-82e2-14e08a7179b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fda3579e-cf28-40be-913a-413b172bbf6b"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obj_status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="430" y="0" width="100" height="20" uuid="b9db0026-e46a-42e7-92fd-7fcba937aef3"/>
+				<textElement textAlignment="Right">
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="5a243a6d-8a93-4b76-931c-f50680056c2d"/>
+				<textElement>
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="530" y="0" width="100" height="20" uuid="6d889a3a-8f8b-4605-a9c1-2b0a3ae328d0"/>
+				<textElement textAlignment="Left">
+					<font fontName="Swis721 Lt BT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
