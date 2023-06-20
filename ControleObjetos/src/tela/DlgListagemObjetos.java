@@ -4,6 +4,8 @@
  */
 package tela;
 
+import apoio.ComboItem;
+import apoio.CombosDAO;
 import apoio.Relatorios;
 
 /**
@@ -18,6 +20,9 @@ public class DlgListagemObjetos extends javax.swing.JDialog {
     public DlgListagemObjetos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        new CombosDAO().popularComboBox("status", cmbStatusObjeto, "WHERE tipo = 0");
+
     }
 
     /**
@@ -33,10 +38,9 @@ public class DlgListagemObjetos extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         btnFechar = new javax.swing.JButton();
         btnGerar = new javax.swing.JButton();
-        rabTodos = new javax.swing.JRadioButton();
-        rabEmprestados = new javax.swing.JRadioButton();
-        rabDisponiveis = new javax.swing.JRadioButton();
-        rabPerdidos = new javax.swing.JRadioButton();
+        cmbStatusObjeto = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,40 +61,29 @@ public class DlgListagemObjetos extends javax.swing.JDialog {
             }
         });
 
-        btgTipoObjetos.add(rabTodos);
-        rabTodos.setText("Todos os Objetos");
+        jLabel2.setText("Selecione o status do objeto para listagem:");
 
-        btgTipoObjetos.add(rabEmprestados);
-        rabEmprestados.setText("Objetos Emprestados");
-
-        btgTipoObjetos.add(rabDisponiveis);
-        rabDisponiveis.setText("Objetos Disponíveis");
-
-        btgTipoObjetos.add(rabPerdidos);
-        rabPerdidos.setText("Objetos Perdidos");
+        jLabel3.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
+        jLabel3.setText("* Não selecionar um status irá listar todos os objetos;");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnGerar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFechar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rabEmprestados)
-                            .addComponent(rabTodos)
-                            .addComponent(rabDisponiveis)
-                            .addComponent(rabPerdidos))))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(cmbStatusObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGerar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFechar)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,18 +91,16 @@ public class DlgListagemObjetos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rabTodos)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rabEmprestados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rabDisponiveis)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rabPerdidos)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(cmbStatusObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFechar)
                     .addComponent(btnGerar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,21 +110,17 @@ public class DlgListagemObjetos extends javax.swing.JDialog {
     private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
         String dml = " ";
         String[][] valores = {
-            {"somenteEmprestado", "Não"}
+            {"somenteEmprestado", "Todos"}
         };
 
-        if (rabEmprestados.isSelected()) {
-            dml = "AND tipo.id = 2 ";
-        }
-        if (rabDisponiveis.isSelected()) {
-            dml = "AND tipo.id = 1 ";
-        }
-        if (rabPerdidos.isSelected()) {
-            dml = "AND tipo.id = 3 ";
+        if (cmbStatusObjeto.getSelectedIndex() > 0) {
+            ComboItem tempItem = (ComboItem) cmbStatusObjeto.getSelectedItem();
+            dml += "AND obj.status_id = " + tempItem.getId() + " ";
+            valores[0][1] = tempItem.getDescricao();
         }
 
         System.out.println("DML: " + dml);
-        
+
         this.dispose();
         new Relatorios().gerarRelatorioCompleto("/relatorios/cade_software_objetos.jrxml", dml, valores);
     }//GEN-LAST:event_btnGerarActionPerformed
@@ -188,10 +175,9 @@ public class DlgListagemObjetos extends javax.swing.JDialog {
     private javax.swing.ButtonGroup btgTipoObjetos;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnGerar;
+    private javax.swing.JComboBox<String> cmbStatusObjeto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton rabDisponiveis;
-    private javax.swing.JRadioButton rabEmprestados;
-    private javax.swing.JRadioButton rabPerdidos;
-    private javax.swing.JRadioButton rabTodos;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
