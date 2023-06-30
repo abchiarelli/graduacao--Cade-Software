@@ -19,9 +19,6 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
-        
-        tfdUsuario.setText("juca@mail.com");
-        pfdSenha.setText("baloso1337");
     }
 
     /**
